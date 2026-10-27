@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "./components/Navbar";
+import Hero from "./components/Hero";
 import { useTextos } from "./hooks/useTextos";
 import "./App.css";
 
@@ -20,6 +21,7 @@ const App = () => {
         idioma={idioma}
         onCambiarIdioma={setIdioma}
       />
+      <Hero textos={textos} />
     </div>
   );
 };

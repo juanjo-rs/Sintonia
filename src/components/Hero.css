@@ -1,0 +1,4 @@
+.hero-etiqueta{
+    background-color: rgb( from var(--marca-primario-presionado) r g b/ 0.5);
+    width: 240px;
+}
