@@ -1,7 +1,11 @@
 * {
   box-sizing: border-box;
 }
-
+h1,
+h2,
+h3 {
+  margin: var(--espacio-6) 0;
+}
 body {
   margin: 0;
   font-family: var(--fuente-inter);
@@ -10,25 +14,9 @@ body {
   color: var(--texto-principal);
   background: var(--fondo-base);
 }
-
-h1,
-h2,
-h3 {
-  font-family: var(--fuente-syne);
-  line-height: 1.2;
-  overflow-wrap: anywhere;
-}
-
-a {
-  color: var(--marca-primario);
-}
-
-a:hover {
-  color: var(--marca-primario-hover);
-}
-
 .contenedor {
-  max-width: 1200px;
+  width: 100%;
+  max-width: 1440px;
   margin-inline: auto;
-  width: calc(100% - 2rem);
+  padding-inline: clamp(var(--espacio-4), 5.56vw, 80px);
 }

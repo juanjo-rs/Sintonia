@@ -32,29 +32,41 @@ const Navbar = ({ textos, cargando, idioma, onCambiarIdioma }) => {
     return () => document.removeEventListener("keydown", cerrarConEscape);
   }, [abierto]);
 
+  useEffect(() => {
+    const consulta = window.matchMedia("(min-width: 900px)");
+    function alCambiar(evento) {
+      if (evento.matches) setAbierto(false);
+    }
+    consulta.addEventListener("change", alCambiar);
+    return () => consulta.removeEventListener("change", alCambiar);
+  }, []);
+
   return (
     <header className={`navbar${abierto ? " is-abierto" : ""}`}>
       <nav
-        className="navbar-interior contenedor"
+        className="navbar-contenedor contenedor"
         aria-label={nav?.aria?.navegacion}
       >
         <a
           href="#inicio"
-          className="navbar-marca"
+          className="navbar-contenedor-logo-nombre"
           aria-label={nav?.logo?.aria}
           onClick={() => setAbierto(false)}
         >
           <Logo className="navbar-logo" />
+          {nav?.logo?.texto && (
+            <span className="navbar-nombre">{nav.logo.texto}</span>
+          )}
         </a>
 
         <div className="navbar-movil-acciones">
           {botones?.ingresar && (
             <a
               href="#ingresar"
-              className="navbar-enlace-texto cuerpo-m navbar-ingresar-movil"
+              className="navbar-ingresar navbar-ingresar-movil"
               onClick={() => setAbierto(false)}
             >
-              {botones.ingresar}
+              <span className="navbar-ingresar-texto">{botones.ingresar}</span>
             </a>
           )}
           <button
@@ -80,7 +92,7 @@ const Navbar = ({ textos, cargando, idioma, onCambiarIdioma }) => {
               {enlaces.map(([clave, etiqueta]) => (
                 <li key={clave}>
                   <a
-                    className="cuerpo-m"
+                    className={`navbar-${clave}`}
                     href={DESTINOS[clave]}
                     onClick={() => setAbierto(false)}
                   >
@@ -91,11 +103,13 @@ const Navbar = ({ textos, cargando, idioma, onCambiarIdioma }) => {
             </ul>
           )}
 
+          <div className="navbar-espacio" aria-hidden="true" />
+
           <div className="navbar-acciones">
             {codigos && (
               <div className="navbar-idioma">
                 {etiquetaIdioma && (
-                  <p className="cuerpo-m navbar-idioma-etiqueta">{etiquetaIdioma}</p>
+                  <p className="navbar-idioma-etiqueta">{etiquetaIdioma}</p>
                 )}
                 <div
                   className="navbar-idioma-switch"
@@ -117,24 +131,26 @@ const Navbar = ({ textos, cargando, idioma, onCambiarIdioma }) => {
               </div>
             )}
 
-            {botones?.ingresar && (
-              <a
-                href="#ingresar"
-                className="navbar-enlace-texto cuerpo-m navbar-ingresar-desktop"
-                onClick={() => setAbierto(false)}
-              >
-                {botones.ingresar}
-              </a>
-            )}
-            {botones?.crearCuenta && (
-              <a
-                href="#crear-cuenta"
-                className="navbar-accion cuerpo-m-fuerte"
-                onClick={() => setAbierto(false)}
-              >
-                {botones.crearCuenta}
-              </a>
-            )}
+            <div className="navbar-accesos">
+              {botones?.ingresar && (
+                <a
+                  href="#ingresar"
+                  className="navbar-ingresar"
+                  onClick={() => setAbierto(false)}
+                >
+                  <span className="navbar-ingresar-texto">{botones.ingresar}</span>
+                </a>
+              )}
+              {botones?.crearCuenta && (
+                <a
+                  href="#crear-cuenta"
+                  className="navbar-crearcuenta"
+                  onClick={() => setAbierto(false)}
+                >
+                  <span className="navbar-crearcuenta-texto">{botones.crearCuenta}</span>
+                </a>
+              )}
+            </div>
           </div>
         </div>
       </nav>

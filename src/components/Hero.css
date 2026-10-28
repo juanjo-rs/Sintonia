@@ -1,4 +1,231 @@
-.hero-etiqueta{
-    background-color: rgb( from var(--marca-primario-presionado) r g b/ 0.5);
-    width: 240px;
+.hero {
+  padding-top: var(--espacio-12);
+}
+
+.hero .contenedor {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-8);
+}
+
+.contenedor-visual {
+  position: relative;
+  flex-shrink: 0;
+  overflow: visible;
+  width: 432px;
+  height: 384px;
+  margin-left: auto;
+}
+
+.collage {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 540px;
+  height: 480px;
+  transform: scale(0.8);
+  transform-origin: top right;
+}
+
+.collage-principal,
+.collage-rayas,
+.collage-ondas,
+.collage-nota {
+  position: absolute;
+  border-radius: 28px;
+  box-shadow: var(--sombra-flotante);
+}
+
+.collage-principal {
+  top: 30px;
+  left: 120px;
+  z-index: 1;
+  overflow: hidden;
+  width: 320px;
+  height: 320px;
+  background: var(--portada-3);
+}
+
+.collage-disco {
+  position: absolute;
+  top: 148px;
+  left: 28px;
+  width: 264px;
+  height: 264px;
+  border-radius: var(--radio-completo);
+  background: var(--fijo-negro);
+}
+
+.collage-punto {
+  position: absolute;
+  top: 48px;
+  right: 44px;
+  width: 72px;
+  height: 72px;
+  border-radius: var(--radio-completo);
+  background: var(--fijo-blanco);
+}
+
+.collage-rayas {
+  top: 4px;
+  left: 372px;
+  z-index: 3;
+  width: 152px;
+  height: 152px;
+  transform: rotate(8deg);
+  background: repeating-linear-gradient(
+    -32deg,
+    var(--portada-2) 0 16px,
+    var(--portada-4) 16px 32px
+  );
+}
+
+.collage-ondas {
+  top: 292px;
+  left: 48px;
+  z-index: 3;
+  width: 152px;
+  height: 152px;
+  transform: rotate(-18deg);
+  background: radial-gradient(
+    circle at 0 100%,
+    var(--portada-5) 0 22%,
+    var(--portada-1) 23% 36%,
+    var(--portada-5) 37% 48%,
+    var(--portada-1) 49% 64%,
+    var(--portada-5) 65% 100%
+  );
+}
+
+.collage-nota {
+  top: 278px;
+  left: 392px;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 206px;
+  padding: 16px;
+  transform: rotate(-4deg);
+  background: var(--marca-primario);
+}
+
+.collage-nota p {
+  margin: 0;
+  width: 174px;
+  letter-spacing: 0;
+  color: var(--texto-sobre-marca);
+  white-space: nowrap;
+}
+
+.hero-etiqueta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  height: 24px;
+  padding: var(--espacio-1) var(--espacio-2);
+  margin: 0;
+  border-radius: var(--radio-completo);
+  background-color: var(--marca-suave);
+}
+
+.hero-etiqueta-texto {
+  margin: 0;
+  color: var(--texto-marca);
+  white-space: nowrap;
+}
+.contenedor-hero{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 692px;
+    min-width: 0;
+    gap: var(--espacio-6);
+}
+
+.contenedor-hero .titular-gigante,
+.contenedor-hero .cuerpo-g {
+    margin: 0;
+}
+
+.contenedor-hero .titular-gigante {
+    font-size: clamp(40px, 10vw, 120px);
+    line-height: 0.9;
+    overflow-wrap: normal;
+    word-break: normal;
+}
+
+.hero-botones{
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--espacio-4);
+}
+.hero-boton-cuenta{
+    width: auto;
+    height: 52px;
+    background-color: var(--marca-primario);
+    padding: 14px 28px;
+    border-radius: var(--radio-completo);
+    color: var(--texto-sobre-marca);
+    text-decoration: none;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    white-space: nowrap;
+    transition: background-color 0.2s ease;
+}
+.hero-boton-cuenta:hover {
+    background-color: var(--marca-primario-hover);
+}
+.hero-boton-catalogo{
+    width: auto;
+    height: 52px;
+    padding: 14px 28px;
+    border-radius: var(--radio-completo);
+    border: 1px solid;
+    border-color: var(--borde-fuerte);
+    color: var(--texto-principal);
+    text-decoration: none;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    white-space: nowrap;
+    transition: background-color 0.2s ease;
+}
+.hero-boton-catalogo:hover {
+    background-color: var(--fondo-superficie);
+}
+
+@media (max-width: 1100px) {
+  .contenedor-visual {
+    width: 378px;
+    height: 336px;
+  }
+
+  .collage {
+    transform: scale(0.7);
+  }
+}
+
+@media (max-width: 899px) {
+  .hero .contenedor {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .contenedor-visual {
+    display: none;
+  }
+
+  .hero-botones {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+
+  .hero-boton-cuenta,
+  .hero-boton-catalogo {
+    width: 100%;
+  }
 }

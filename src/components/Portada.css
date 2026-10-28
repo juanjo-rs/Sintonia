@@ -1,0 +1,22 @@
+.tarjeta-contenedor {
+  position: relative;
+  overflow: hidden;
+  width: 320px;
+  height: 320px;
+  margin-top: 30px;
+  margin-left: 120px;
+  margin-right: 0;
+  border-radius: 28px;
+  background-color: var(--portada-3);
+  box-shadow: var(--sombra-flotante);
+}
+
+.tarjeta-circulo-negro {
+  position: absolute;
+  top: 218.18px;
+  left: 130.91px;
+  width: 58.18px;
+  height: 58.18px;
+  border-radius: var(--radio-completo);
+  background-color: var(--fijo-negro);
+}
