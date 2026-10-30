@@ -1,0 +1,73 @@
+.pie-pagina {
+  margin-top: auto;
+  padding-block: var(--espacio-12);
+  border-top: 1px solid var(--borde-sutil);
+  background-color: var(--fondo-superficie);
+}
+
+.pie-pagina-fila {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--espacio-8);
+}
+
+.contenedor-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--espacio-3);
+}
+
+.contenedor-columnas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--espacio-8);
+}
+
+.logo-footer {
+  display: block;
+  flex-shrink: 0;
+  height: 32px;
+  width: auto;
+  margin: 0;
+}
+
+.lema-footer {
+  margin: 0;
+  max-width: 280px;
+  text-align: left;
+  color: var(--texto-secundario);
+}
+
+.columna-footer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-2);
+  min-width: 140px;
+}
+
+.columna-footer-titulo {
+  margin: 0 0 var(--espacio-2);
+  color: var(--texto-principal);
+}
+
+.columna-footer-enlace {
+  color: var(--texto-secundario);
+  text-decoration: none;
+}
+
+.columna-footer-enlace:hover {
+  color: var(--texto-principal);
+}
+
+@media (max-width: 899px) {
+  .pie-pagina-fila,
+  .contenedor-footer,
+  .contenedor-columnas {
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+}
