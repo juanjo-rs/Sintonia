@@ -135,6 +135,9 @@
   color: var(--texto-marca);
   white-space: nowrap;
 }
+.hero-subtitulo{
+  color: var(--texto-secundario);
+}
 .contenedor-hero{
     display: flex;
     flex-direction: column;
@@ -143,8 +146,44 @@
     min-width: 0;
     gap: var(--espacio-6);
 }
+.contenedor-cifras{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 40px;
+  width: auto;
+  padding-top: 12px;
+}
+.contenedor-cifras-canciones,
+.contenedor-cifras-genero,
+.contenedor-cifras-corte{
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 auto;
+  width: auto;
+  max-width: none;
+  row-gap: 0px;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.canciones-cifra,
+.genero-cifra,
+.corte-cifra{
+  color: var(--texto-marca);
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.canciones-etiqueta,
+.genero-etiqueta,
+.corte-etiqueta{
+  color: var(--texto-secundario);
+  margin-top: 2px;
+  white-space: nowrap;
+}
 
 .contenedor-hero .titular-gigante,
+.contenedor-hero .titular-h1,
 .contenedor-hero .cuerpo-g {
     margin: 0;
 }
@@ -217,6 +256,9 @@
   .contenedor-visual {
     display: none;
   }
+  .hero-etiqueta{
+    display: none;
+  }
 
   .hero-botones {
     flex-direction: column;
@@ -227,5 +269,9 @@
   .hero-boton-cuenta,
   .hero-boton-catalogo {
     width: 100%;
+  }
+
+  .contenedor-cifras {
+    display: none;
   }
 }
