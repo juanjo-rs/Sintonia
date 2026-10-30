@@ -288,6 +288,10 @@
     overflow: hidden;
   }
 
+  .navbar {
+    border-bottom: 1px solid var(--borde-sutil);
+  }
+
   .navbar.is-abierto {
     background: var(--fondo-base);
   }
@@ -303,7 +307,6 @@
     min-height: 0;
     margin: 0;
     background: var(--fondo-base);
-    border-top: 1px solid var(--borde-sutil);
   }
 
   .navbar-enlaces,
