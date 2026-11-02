@@ -38,11 +38,18 @@
   flex-shrink: 0;
   width: 32px;
   height: 32px;
+  overflow: hidden;
   border-radius: var(--radio-completo);
   opacity: 1;
-  object-fit: none;
-  object-position: left center;
   background: var(--marca-primario);
+  color: var(--texto-principal);
+}
+
+.navbar-logo svg {
+  display: block;
+  width: 128px;
+  height: 32px;
+  max-width: none;
 }
 
 .navbar-nombre {
