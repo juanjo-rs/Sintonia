@@ -83,8 +83,25 @@ const ICONOS = {
         <path d="M3.33337 8H12.6667" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
         <path d="M8 3.33337L12.6667 8.00004L8 12.6667" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
       </>
-  ),
-},
+    ),
+  },
+  mas: {
+    viewBox: "0 0 18 18",
+    size: 18,
+    content: (
+      <>
+        <path d="M3.75 9H14.25" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M9 3.75V14.25" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      </>
+    ),
+  },
+  menos: {
+    viewBox: "0 0 18 18",
+    size: 18,
+    content: (
+      <path d="M3.75 9H14.25" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    ),
+  },
 };
 
 export default function Icono({ nombre, tamano }) {

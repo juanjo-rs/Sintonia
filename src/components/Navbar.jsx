@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import "./Navbar.css";
 import Icono from "./Icono.jsx";
 import Logo from "./Logo.jsx";
+import Accesibilidad from "./Accesibilidad.jsx";
 
 const DESTINOS = {
   inicio: "#inicio",
@@ -10,13 +11,22 @@ const DESTINOS = {
 
 const Navbar = ({ textos, cargando, idioma, onCambiarIdioma }) => {
   const [abierto, setAbierto] = useState(false);
+  const [accesibilidadAbierta, setAccesibilidadAbierta] = useState(false);
   const botonMenu = useRef(null);
+  const botonAccesibilidad = useRef(null);
+
+  function abrirAccesibilidad(evento) {
+    botonAccesibilidad.current = evento.currentTarget;
+    setAccesibilidadAbierta(true);
+  }
   const nav = textos?.navbar;
   const abrir = textos?.menuMovil?.abrir;
   const cerrar = textos?.menuMovil?.cerrar;
   const botones = nav?.botones?.invitado;
   const codigos = textos?.idioma?.codigos;
   const etiquetaIdioma = textos?.idioma?.tituloCorto;
+  const ariaAccesibilidad = nav?.aria?.accesibilidad;
+  const tituloAccesibilidad = textos?.accesibilidad?.titulo;
   const enlaces = Object.entries(nav?.enlaces ?? {}).filter(
     ([clave, etiqueta]) => DESTINOS[clave] && typeof etiqueta === "string" && etiqueta.trim()
   );
@@ -106,6 +116,18 @@ const Navbar = ({ textos, cargando, idioma, onCambiarIdioma }) => {
           <div className="navbar-espacio" aria-hidden="true" />
 
           <div className="navbar-acciones">
+            {ariaAccesibilidad && (
+              <button
+                type="button"
+                className="navbar-icono navbar-accesibilidad-boton navbar-accesibilidad-escritorio"
+                aria-label={ariaAccesibilidad}
+                aria-expanded={accesibilidadAbierta}
+                onClick={abrirAccesibilidad}
+              >
+                <Icono nombre="accesibilidad" />
+              </button>
+            )}
+
             {codigos && (
               <div className="navbar-idioma">
                 {etiquetaIdioma && (
@@ -128,6 +150,25 @@ const Navbar = ({ textos, cargando, idioma, onCambiarIdioma }) => {
                     </button>
                   ))}
                 </div>
+              </div>
+            )}
+
+            {ariaAccesibilidad && (
+              <div className="navbar-accesibilidad-movil">
+                {tituloAccesibilidad && (
+                  <p className="navbar-accesibilidad-titulo cuerpo-m-fuerte">
+                    {tituloAccesibilidad}
+                  </p>
+                )}
+                <button
+                  type="button"
+                  className="navbar-icono navbar-accesibilidad-boton"
+                  aria-label={ariaAccesibilidad}
+                  aria-expanded={accesibilidadAbierta}
+                  onClick={abrirAccesibilidad}
+                >
+                  <Icono nombre="accesibilidad" />
+                </button>
               </div>
             )}
 
@@ -154,6 +195,12 @@ const Navbar = ({ textos, cargando, idioma, onCambiarIdioma }) => {
           </div>
         </div>
       </nav>
+      <Accesibilidad
+        textos={textos}
+        abierta={accesibilidadAbierta}
+        anclaRef={botonAccesibilidad}
+        onCerrar={() => setAccesibilidadAbierta(false)}
+      />
     </header>
   );
 };

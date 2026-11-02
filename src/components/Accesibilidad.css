@@ -1,0 +1,211 @@
+.accesibilidad-capa {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: transparent;
+}
+
+.accesibilidad-panel {
+  position: fixed;
+  top: 72px;
+  left: 16px;
+  width: min(calc(100vw - 16px), 320px);
+  max-height: calc(100dvh - 80px);
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: var(--espacio-4);
+  border: 1px solid var(--borde-sutil);
+  border-radius: var(--radio-xl);
+  background: var(--fondo-elevada);
+  box-shadow: var(--sombra-flotante);
+}
+
+.accesibilidad-cabecera {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espacio-3);
+  margin-bottom: var(--espacio-4);
+}
+
+.accesibilidad-titulo {
+  margin: 0;
+  color: var(--texto-principal);
+}
+
+.accesibilidad-cerrar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radio-completo);
+  color: var(--texto-principal);
+  background: transparent;
+  cursor: pointer;
+}
+
+.accesibilidad-cerrar:hover {
+  background: var(--fondo-sutil);
+}
+
+.accesibilidad-opciones {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-4);
+}
+
+.accesibilidad-fila {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espacio-3);
+}
+
+.accesibilidad-fila-tamano {
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--espacio-2);
+}
+
+.accesibilidad-textos {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.accesibilidad-etiqueta {
+  margin: 0;
+  color: var(--texto-principal);
+}
+
+.accesibilidad-ayuda {
+  margin: 0;
+  color: var(--texto-secundario);
+}
+
+.accesibilidad-tamano {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espacio-3);
+  padding: 4px;
+  border: 1px solid var(--borde-fuerte);
+  border-radius: 12px;
+  background: transparent;
+}
+
+.accesibilidad-tamano-boton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radio-completo);
+  color: var(--texto-principal);
+  background: transparent;
+  cursor: pointer;
+}
+
+.accesibilidad-tamano-boton:hover:not(:disabled) {
+  background: var(--fondo-sutil);
+}
+
+.accesibilidad-tamano-boton:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.accesibilidad-tamano-valor {
+  color: var(--texto-principal);
+}
+
+.accesibilidad-switch {
+  appearance: none;
+  position: relative;
+  flex-shrink: 0;
+  width: 40px;
+  height: 24px;
+  margin: 0;
+  border: 0;
+  border-radius: var(--radio-completo);
+  background: var(--fondo-sutil);
+  cursor: pointer;
+  transition: background-color 160ms ease-out;
+}
+
+.accesibilidad-switch::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  border-radius: var(--radio-completo);
+  background: var(--fijo-blanco);
+  transition: transform 160ms ease-out;
+}
+
+.accesibilidad-switch:checked {
+  background: var(--marca-primario);
+}
+
+.accesibilidad-switch:checked::after {
+  transform: translateX(16px);
+}
+
+.accesibilidad-nota {
+  margin: var(--espacio-4) 0 0;
+  color: var(--texto-terciario);
+}
+
+.accesibilidad-pie {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espacio-3);
+  margin-top: var(--espacio-4);
+}
+
+.accesibilidad-declaracion {
+  color: var(--texto-marca);
+  text-decoration: underline;
+}
+
+.accesibilidad-restablecer {
+  height: 36px;
+  padding: 6px 14px;
+  border: 1px solid var(--borde-fuerte);
+  border-radius: var(--radio-completo);
+  color: var(--texto-principal);
+  background: transparent;
+  cursor: pointer;
+}
+
+.accesibilidad-restablecer:hover {
+  border-color: var(--texto-secundario);
+}
+
+@media (max-width: 899px) {
+  .accesibilidad-capa {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--espacio-4);
+    background: #00000066;
+  }
+
+  .accesibilidad-panel.is-centrado {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: min(100%, 400px);
+    max-height: min(82dvh, 680px);
+    padding: var(--espacio-6);
+  }
+}

@@ -20,3 +20,44 @@ body {
   margin-inline: auto;
   padding-inline: clamp(var(--espacio-4), 5.56vw, 80px);
 }
+
+html[data-contraste] {
+  --fondo-base: #000000;
+  --fondo-superficie: #0a0a0a;
+  --fondo-elevada: #121212;
+  --fondo-sutil: #1a1a1a;
+  --texto-principal: #ffffff;
+  --texto-secundario: #f0f0f0;
+  --texto-terciario: #d0d0d0;
+  --borde-sutil: #ffffff;
+  --borde-fuerte: #ffffff;
+  --marca-primario: #d6f97a;
+  --texto-marca: #d6f97a;
+}
+
+html[data-movimiento-reducido] *,
+html[data-movimiento-reducido] *::before,
+html[data-movimiento-reducido] *::after {
+  animation: none !important;
+  transition: none !important;
+  scroll-behavior: auto !important;
+}
+
+html[data-enlaces-subrayados] a {
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+html[data-espaciado-lectura] body {
+  letter-spacing: 0.04em;
+  word-spacing: 0.08em;
+  line-height: 1.75;
+}
+
+html[data-espaciado-lectura] p,
+html[data-espaciado-lectura] li,
+html[data-espaciado-lectura] a,
+html[data-espaciado-lectura] button,
+html[data-espaciado-lectura] span {
+  line-height: 1.75;
+}
