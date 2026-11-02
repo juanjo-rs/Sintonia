@@ -5,6 +5,9 @@ import Footer from "./components/Footer";
 import { useTextos } from "./hooks/useTextos";
 import { useGeneros } from "./hooks/useGeneros";
 import "./App.css";
+import Destacados from "./components/Destacados";
+import Cta from "./components/Cta";
+
 
 const App = () => {
   const [idioma, setIdioma] = useState("es");
@@ -28,6 +31,13 @@ const App = () => {
         textos={textos}
         idioma={idioma}
         generos={generos}
+      />
+      <Destacados
+        textos={textos}
+        generos={generos}
+      />
+      <Cta
+        textos={textos}
       />
       <Footer textos={textos} />
     </div>
