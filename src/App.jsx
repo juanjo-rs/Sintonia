@@ -7,7 +7,7 @@ import { useGeneros } from "./hooks/useGeneros";
 import "./App.css";
 import Destacados from "./components/Destacados";
 import Cta from "./components/Cta";
-
+import Generos from "./components/Generos";
 
 const App = () => {
   const [idioma, setIdioma] = useState("es");
@@ -33,6 +33,10 @@ const App = () => {
         generos={generos}
       />
       <Destacados
+        textos={textos}
+        generos={generos}
+      />
+      <Generos
         textos={textos}
         generos={generos}
       />
