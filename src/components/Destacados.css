@@ -1,0 +1,84 @@
+.contenedor-destacados {
+  padding-top: var(--espacio-16);
+  padding-bottom: var(--espacio-16);
+}
+
+.destacados-fila {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-8);
+}
+
+.destacados-superior {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.destacados-titulo {
+  margin: 0;
+  color: var(--texto-principal);
+}
+
+.destacados-enlace {
+  color: var(--texto-marca);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espacio-2);
+  text-decoration: none;
+}
+
+.destacados-lista {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: var(--espacio-6);
+}
+
+.destacados-caja {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-3);
+  min-width: 0;
+  padding: var(--espacio-4);
+  border-radius: var(--radio-lg);
+  background: var(--fondo-superficie);
+}
+
+.destacados-caja-imagen {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: var(--radio-md);
+}
+
+.destacados-caja-textos {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-1);
+}
+
+.destacados-caja-nombre {
+  margin: 0;
+  color: var(--texto-principal);
+}
+
+.destacados-caja-autor {
+  margin: 0;
+  color: var(--texto-secundario);
+}
+
+@media (max-width: 899px) {
+  .destacados-lista {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: var(--espacio-4);
+    overflow-x: auto;
+    padding-bottom: var(--espacio-2);
+  }
+
+  .destacados-caja {
+    flex: 0 0 160px;
+  }
+}

@@ -75,6 +75,16 @@ const ICONOS = {
       <path d="M15 4.5L6.75 12.75L3 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     ),
   },
+  flecha: {
+    viewBox: "0 0 16 16",
+    size: 16,
+    content: (
+      <>
+        <path d="M3.33337 8H12.6667" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M8 3.33337L12.6667 8.00004L8 12.6667" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      </>
+  ),
+},
 };
 
 export default function Icono({ nombre, tamano }) {

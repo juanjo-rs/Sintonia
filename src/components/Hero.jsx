@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./Hero.css";
 
+const DESTINOS = {
+  crearCuenta: "#crear-cuenta",
+  catalogo: "#catalogo",
+};
+
 const TEXTO ={
   es: ["Sube la niebla","por la montaña","y el camino canta"],
   en: ["The fog rises","up the mountain","and the path sings."]
@@ -30,12 +35,12 @@ const Hero = ({ textos, idioma, generos }) => {
           <p className={movil ? "hero-subtitulo cuerpo-m" : "hero-subtitulo cuerpo-g"}>{textosH?.subtitulo}</p>
           <div className="hero-botones">
             <a
-              href="#crear-cuenta"
+              href={DESTINOS.crearCuenta}
               className="hero-boton-cuenta cuerpo-m-fuerte"
             >
               {textosH?.botones?.crearCuentaGratis}
             </a>
-            <a href="#catalogo" className="hero-boton-catalogo cuerpo-m-fuerte">
+            <a href={DESTINOS.catalogo} className="hero-boton-catalogo cuerpo-m-fuerte">
               {textosH?.botones?.explorarCatalogo}
             </a>
           </div>
