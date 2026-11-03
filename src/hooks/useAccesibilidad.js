@@ -49,9 +49,43 @@ function valoresIniciales() {
   };
 }
 
+function soportaZoomCss() {
+  try {
+    return typeof CSS !== "undefined" && CSS.supports("zoom", "1.1");
+  } catch {
+    return false;
+  }
+}
+
+function limpiarEscalaSitio(sitio) {
+  if (!sitio) return;
+  sitio.style.zoom = "";
+  sitio.style.transform = "";
+  sitio.style.transformOrigin = "";
+  sitio.style.width = "";
+  sitio.style.marginInline = "";
+}
+
 function aplicar(valores) {
   const raiz = document.documentElement;
-  raiz.style.zoom = valores.tamanoTexto === 100 ? "" : `${valores.tamanoTexto}%`;
+  const sitio = document.querySelector(".sitio");
+  const factor = valores.tamanoTexto / 100;
+
+  raiz.style.zoom = "";
+  limpiarEscalaSitio(sitio);
+
+  if (factor !== 1 && sitio) {
+    if (soportaZoomCss()) {
+      // Zoom en el sitio (no en html): en móvil/Safari html{zoom} a menudo no hace nada.
+      sitio.style.zoom = `${valores.tamanoTexto}%`;
+    } else {
+      sitio.style.transformOrigin = "top center";
+      sitio.style.transform = `scale(${factor})`;
+      sitio.style.width = `${100 / factor}%`;
+      sitio.style.marginInline = "auto";
+    }
+  }
+
   raiz.toggleAttribute("data-contraste", valores.altoContraste);
   raiz.toggleAttribute("data-movimiento-reducido", valores.reducirMovimiento);
   raiz.toggleAttribute("data-enlaces-subrayados", valores.subrayarEnlaces);

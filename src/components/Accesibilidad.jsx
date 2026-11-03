@@ -1,4 +1,5 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import "./Accesibilidad.css";
 import Icono from "./Icono";
 import { useAccesibilidad } from "../hooks/useAccesibilidad";
@@ -99,7 +100,7 @@ const Accesibilidad = ({ textos, abierta, onCerrar, anclaRef }) => {
       ? panel.tamanoTexto.valor.replace("{valor}", String(valores.tamanoTexto))
       : `${valores.tamanoTexto} %`;
 
-  return (
+  return createPortal(
     <div className="accesibilidad-capa" onClick={onCerrar}>
       <div
         ref={dialogo}
@@ -281,7 +282,8 @@ const Accesibilidad = ({ textos, abierta, onCerrar, anclaRef }) => {
           )}
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };
 
