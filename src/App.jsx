@@ -1,47 +1,36 @@
 import React, { useEffect, useState } from "react";
-import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
-import Footer from "./components/Footer";
+import { Routes, Route } from "react-router-dom";
+import Layout from "./components/Layout";
+import Inicio from "./pages/Inicio";
+import Catalogo from "./pages/Catalogo";
 import { useTextos } from "./hooks/useTextos";
-import { useGeneros } from "./hooks/useGeneros";
 import "./App.css";
-import Destacados from "./components/Destacados";
-import Cta from "./components/Cta";
-import Generos from "./components/Generos";
 
 const App = () => {
   const [idioma, setIdioma] = useState("es");
   const { textos, cargando, error } = useTextos(idioma);
-  const { generos } = useGeneros();
 
   useEffect(() => {
     document.documentElement.lang = idioma;
   }, [idioma]);
 
   return (
-    <div className="sitio">
-      <Navbar
-        textos={textos}
-        cargando={cargando}
-        error={error}
-        idioma={idioma}
-        onCambiarIdioma={setIdioma}
-      />
-      <Hero
-        textos={textos}
-        idioma={idioma}
-        generos={generos}
-      />
-      <Destacados textos={textos} />
-      <Generos
-        textos={textos}
-        generos={generos}
-      />
-      <Cta
-        textos={textos}
-      />
-      <Footer textos={textos} />
-    </div>
+    <Routes>
+      <Route
+        element={
+          <Layout
+            textos={textos}
+            cargando={cargando}
+            error={error}
+            idioma={idioma}
+            onCambiarIdioma={setIdioma}
+          />
+        }
+      >
+        <Route index element={<Inicio />} />
+        <Route path="catalogo" element={<Catalogo />} />
+      </Route>
+    </Routes>
   );
 };
 

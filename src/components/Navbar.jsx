@@ -1,12 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import "./Navbar.css";
 import Icono from "./Icono.jsx";
 import Logo from "./Logo.jsx";
 import Accesibilidad from "./Accesibilidad.jsx";
 
 const DESTINOS = {
-  inicio: "#inicio",
-  catalogo: "#catalogo",
+  inicio: "/",
+  catalogo: "/catalogo",
 };
 
 const Navbar = ({ textos, cargando, idioma, onCambiarIdioma }) => {
@@ -57,8 +58,8 @@ const Navbar = ({ textos, cargando, idioma, onCambiarIdioma }) => {
         className="navbar-contenedor contenedor"
         aria-label={nav?.aria?.navegacion}
       >
-        <a
-          href="#inicio"
+        <Link
+          to="/"
           className="navbar-contenedor-logo-nombre"
           aria-label={nav?.logo?.aria}
           onClick={() => setAbierto(false)}
@@ -67,7 +68,7 @@ const Navbar = ({ textos, cargando, idioma, onCambiarIdioma }) => {
           {nav?.logo?.texto && (
             <span className="navbar-nombre">{nav.logo.texto}</span>
           )}
-        </a>
+        </Link>
 
         <div className="navbar-movil-acciones">
           {botones?.ingresar && (
@@ -101,13 +102,13 @@ const Navbar = ({ textos, cargando, idioma, onCambiarIdioma }) => {
             <ul className="navbar-enlaces">
               {enlaces.map(([clave, etiqueta]) => (
                 <li key={clave}>
-                  <a
+                  <Link
                     className={`navbar-${clave}`}
-                    href={DESTINOS[clave]}
+                    to={DESTINOS[clave]}
                     onClick={() => setAbierto(false)}
                   >
                     {etiqueta}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>

@@ -1,14 +1,17 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./Footer.css";
 import Logo from "./Logo.jsx";
 
 const DESTINOS = {
-  inicio: "#inicio",
-  catalogo: "#catalogo",
+  inicio: "/",
+  catalogo: "/catalogo",
   ingresar: "#ingresar",
   crearCuenta: "#crear-cuenta",
   terminos: "#terminos",
 };
+
+const RUTAS_APP = new Set(["/", "/catalogo"]);
 
 const Footer = ({ textos }) => {
   const footerT = textos?.footer;
@@ -27,17 +30,32 @@ const Footer = ({ textos }) => {
             {columna?.titulo && (
               <p className="columna-footer-titulo detalle-etiqueta">{columna.titulo}</p>
             )}
-            {Object.entries(columna?.enlaces ?? {}).map(([claveEnlace, etiqueta]) => (
-              DESTINOS[claveEnlace] && typeof etiqueta === "string" && etiqueta.trim() ? (
+            {Object.entries(columna?.enlaces ?? {}).map(([claveEnlace, etiqueta]) => {
+              const destino = DESTINOS[claveEnlace];
+              if (!destino || typeof etiqueta !== "string" || !etiqueta.trim()) {
+                return null;
+              }
+              if (RUTAS_APP.has(destino)) {
+                return (
+                  <Link
+                    key={claveEnlace}
+                    className="columna-footer-enlace cuerpo-p"
+                    to={destino}
+                  >
+                    {etiqueta}
+                  </Link>
+                );
+              }
+              return (
                 <a
                   key={claveEnlace}
                   className="columna-footer-enlace cuerpo-p"
-                  href={DESTINOS[claveEnlace]}
+                  href={destino}
                 >
                   {etiqueta}
                 </a>
-              ) : null
-            ))}
+              );
+            })}
           </div>
         ))}
         </div>

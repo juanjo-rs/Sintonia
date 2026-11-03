@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import "./Hero.css";
 
 const DESTINOS = {
   crearCuenta: "#crear-cuenta",
-  catalogo: "#catalogo",
+  catalogo: "/catalogo",
 };
 
 const TEXTO ={
@@ -40,9 +41,9 @@ const Hero = ({ textos, idioma, generos }) => {
             >
               {textosH?.botones?.crearCuentaGratis}
             </a>
-            <a href={DESTINOS.catalogo} className="hero-boton-catalogo cuerpo-m-fuerte">
+            <Link to={DESTINOS.catalogo} className="hero-boton-catalogo cuerpo-m-fuerte">
               {textosH?.botones?.explorarCatalogo}
-            </a>
+            </Link>
           </div>
           <div className="contenedor-cifras">
             <div className="contenedor-cifras-canciones">
