@@ -25,6 +25,7 @@
   flex-shrink: 0;
   white-space: nowrap;
   color: var(--fijo-blanco);
+  text-decoration: none;
 }
 
 .cta-titulo {

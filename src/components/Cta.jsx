@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./Cta.css"
+const DESTINOS = {
+  crearCuentaGratis: "#crear-cuenta",
+}
 
 const Cta = ({ textos }) => {
     const textoCt = textos?.paginas?.inicioPublico?.cta;
@@ -23,7 +26,7 @@ const Cta = ({ textos }) => {
                         <p className={`cta-texto ${movil ? "cuerpo-p" : "cuerpo-m"}`}>{textoCt?.texto}</p>
                     </div>
                     <div className="cta-boton">
-                      <p className="cta-botones cuerpo-m-fuerte">{textoCt?.botones?.crearCuentaGratis}</p>
+                      <a  href={DESTINOS.crearCuentaGratis} className="cta-botones cuerpo-m-fuerte">{textoCt?.botones?.crearCuentaGratis}</a>
                     </div>
                 </div>
             </div>
