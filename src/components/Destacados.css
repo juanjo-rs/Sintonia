@@ -3,6 +3,11 @@
   padding-bottom: var(--espacio-16);
 }
 
+.contenedor-destacados-catalogo {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
 .destacados-fila {
   display: flex;
   flex-direction: column;
@@ -80,5 +85,9 @@
 
   .destacados-caja {
     flex: 0 0 160px;
+  }
+
+  .contenedor-destacados-catalogo .destacados-caja {
+    background: var(--fondo-elevada);
   }
 }

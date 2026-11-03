@@ -4,3 +4,21 @@
     display: flex;
     flex-direction: column;
 }
+
+.sitio-cuerpo {
+  flex: 1 0 auto;
+}
+
+.catalogo-cuerpo {
+  box-sizing: border-box;
+  width: calc(100% - (var(--espacio-4) * 2));
+  margin: var(--espacio-4) auto;
+  background-color: var(--fondo-superficie);
+  border-radius: var(--radio-lg);
+}
+
+@media (max-width: 899px) {
+  .catalogo-cuerpo {
+    background-color: var(--fondo-base);
+  }
+}

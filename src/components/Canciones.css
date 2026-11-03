@@ -1,0 +1,66 @@
+.contenedor-canciones {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.canciones-fila {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-6);
+}
+
+.canciones-titulo {
+  margin: 0;
+  color: var(--texto-principal);
+}
+
+.canciones-lista {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cancion-fila {
+  display: grid;
+  grid-template-columns: 2rem minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--espacio-4);
+  padding: var(--espacio-4) 0;
+  border-bottom: 1px solid var(--borde-sutil);
+}
+
+.cancion-fila:first-child {
+  border-top: 1px solid var(--borde-sutil);
+}
+
+.cancion-numero {
+  color: var(--texto-terciario);
+}
+
+.cancion-textos {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.cancion-nombre,
+.cancion-artista {
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cancion-nombre {
+  color: var(--texto-principal);
+}
+
+.cancion-artista {
+  color: var(--texto-secundario);
+}
+
+.cancion-duracion {
+  color: var(--texto-terciario);
+  font-variant-numeric: tabular-nums;
+}

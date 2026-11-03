@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import "./Generos.css";
 import Icono from "./Icono";
 import kilometro41 from "../assets/portadas/album-kilometro-41.png";
@@ -9,13 +10,31 @@ import generoSalsa from "../assets/portadas/genero-salsa.png";
 import neonYNeblina from "../assets/portadas/genero-4-neon-y-neblina.png";
 import generoMusicaAndina from "../assets/portadas/genero-musica-andina.png";
 import bajoElGuadual from "../assets/portadas/album-bajo-el-guadual.png";
+import mareaViva from "../assets/portadas/genero-marea-viva.png";
+import pleamar from "../assets/portadas/genero-pleamar.png";
+import generoInstrumental from "../assets/portadas/genero-instrumental.png";
+import todoElRuido from "../assets/portadas/genero-3-todo-el-ruido.png";
+import frailejonAcustico from "../assets/portadas/genero-frailejon-acustico.png";
 
-const DESTINOS = {
-  verCatalogo: "#catalogo",
-};
+const LIMITE_CATALOGO = 12;
 
-/* Imágenes alineadas al color de portada de cada género (orden API). */
 const IMAGENES = [
+  kilometro41,
+  cartasSinEnviar,
+  cantoDeGuadua,
+  generoTropical,
+  generoSalsa,
+  neonYNeblina,
+  generoMusicaAndina,
+  generoInstrumental,
+  mareaViva,
+  pleamar,
+  todoElRuido,
+  frailejonAcustico,
+];
+
+/* En inicio se muestran 8 (4 en compacto); las 2 últimas del bloque de 8 usan portadas previas. */
+const IMAGENES_INICIO = [
   kilometro41,
   cartasSinEnviar,
   cantoDeGuadua,
@@ -31,18 +50,27 @@ function colorDeFondo(token) {
   return `var(--${token.replace("/", "-")})`;
 }
 
-const Generos = ({ textos, generos }) => {
-  const textoG = textos?.paginas?.inicioPublico?.generos;
+const Generos = ({
+  textos,
+  generos,
+  seleccionable = false,
+  generoId = null,
+  onSeleccionarGenero,
+}) => {
+  const textoInicio = textos?.paginas?.inicioPublico?.generos;
+  const textoCatalogo = textos?.paginas?.catalogo?.encabezado;
   const [movil, setMovil] = useState(
     () => window.matchMedia("(max-width: 899px)").matches
   );
   const [compacto, setCompacto] = useState(
     () => window.matchMedia("(max-width: 1099px)").matches
   );
+
   const lista = (Array.isArray(generos) ? generos : []).slice(
     0,
-    compacto ? 4 : 8
+    seleccionable ? LIMITE_CATALOGO : compacto ? 4 : 8
   );
+  const portadas = seleccionable ? IMAGENES : IMAGENES_INICIO;
 
   useEffect(() => {
     const consultaMovil = window.matchMedia("(max-width: 899px)");
@@ -57,17 +85,62 @@ const Generos = ({ textos, generos }) => {
     };
   }, []);
 
+  if (seleccionable) {
+    return (
+      <div className="contenedor-generos contenedor-generos-catalogo">
+        <div className="contenedor-2 generos-fila">
+          <div className="generos-superior generos-superior-catalogo">
+            <p className={`generos-titulo ${movil ? "titular-h3" : "titular-h1"}`}>
+              {textoCatalogo?.titulo}
+            </p>
+            <p className="generos-descripcion cuerpo-m">{textoCatalogo?.subtitulo}</p>
+          </div>
+          {lista.length > 0 && (
+            <div className="generos-lista">
+              {lista.map((genero, indice) => {
+                const seleccionado = generoId === genero.id;
+                return (
+                  <button
+                    key={genero.id}
+                    type="button"
+                    className={`genero-caja${seleccionado ? " seleccionado" : ""}`}
+                    style={{ backgroundColor: colorDeFondo(genero.color) }}
+                    aria-pressed={seleccionado}
+                    onClick={() =>
+                      onSeleccionarGenero?.(seleccionado ? null : genero.id)
+                    }
+                  >
+                    {genero.nombre && (
+                      <p className="genero-caja-nombre titular-h3">{genero.nombre}</p>
+                    )}
+                    {portadas[indice] && (
+                      <img
+                        className="genero-caja-imagen"
+                        src={portadas[indice]}
+                        alt=""
+                      />
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="contenedor-generos">
       <div className="contenedor generos-fila">
         <div className="generos-superior">
           <p className={`generos-titulo ${movil ? "titular-h3" : "titular-h2"}`}>
-            {textoG?.titulo}
+            {textoInicio?.titulo}
           </p>
-          <a href={DESTINOS.verCatalogo} className="generos-enlace cuerpo-p-fuerte">
-            {textoG?.enlaces?.verCatalogo}
+          <Link to="/catalogo" className="generos-enlace cuerpo-p-fuerte">
+            {textoInicio?.enlaces?.verCatalogo}
             <Icono nombre="flecha" />
-          </a>
+          </Link>
         </div>
         {lista.length > 0 && (
           <div className="generos-lista">
@@ -80,10 +153,10 @@ const Generos = ({ textos, generos }) => {
                 {genero.nombre && (
                   <p className="genero-caja-nombre titular-h3">{genero.nombre}</p>
                 )}
-                {IMAGENES[indice] && (
+                {portadas[indice] && (
                   <img
                     className="genero-caja-imagen"
-                    src={IMAGENES[indice]}
+                    src={portadas[indice]}
                     alt=""
                   />
                 )}

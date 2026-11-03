@@ -1,0 +1,105 @@
+.contenedor-albumes-genero {
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-bottom: var(--espacio-12);
+}
+
+.albumes-genero-fila {
+  --album-tam: clamp(140px, 18cqi, 200px);
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-6);
+  container-type: inline-size;
+  container-name: albumes;
+}
+
+.albumes-genero-titulo {
+  margin: 0;
+  color: var(--texto-principal);
+}
+
+.albumes-genero-lista {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(var(--album-tam), var(--album-tam)));
+  gap: clamp(12px, 2cqi, 24px);
+}
+
+.albumes-genero-lista.es-dos {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--espacio-6);
+}
+
+.album-genero-caja {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-3);
+  box-sizing: border-box;
+  width: var(--album-tam);
+  min-width: 0;
+  padding: clamp(12px, 1.5cqi, 16px);
+  border-radius: var(--radio-lg);
+  background: transparent;
+}
+
+.albumes-genero-lista.es-dos .album-genero-caja {
+  flex: 0 0 var(--album-tam);
+  width: var(--album-tam);
+}
+
+.album-genero-imagen {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: contain;
+  object-position: center;
+  border-radius: var(--radio-md);
+}
+
+.album-genero-textos {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  width: 100%;
+}
+
+.album-genero-nombre,
+.album-genero-autor {
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.album-genero-nombre {
+  color: var(--texto-principal);
+}
+
+.album-genero-autor {
+  color: var(--texto-secundario);
+}
+
+@media (max-width: 899px) {
+  .albumes-genero-fila {
+    --album-tam: clamp(160px, 42cqi, 200px);
+  }
+
+  .albumes-genero-lista,
+  .albumes-genero-lista.es-dos {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    gap: var(--espacio-4);
+    overflow-x: auto;
+    padding-bottom: var(--espacio-2);
+  }
+
+  .album-genero-caja,
+  .albumes-genero-lista.es-dos .album-genero-caja {
+    flex: 0 0 var(--album-tam);
+    width: var(--album-tam);
+    background: var(--fondo-elevada);
+  }
+}

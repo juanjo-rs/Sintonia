@@ -3,10 +3,21 @@
   padding-bottom: var(--espacio-12);
 }
 
+.contenedor-generos-catalogo {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
 .generos-fila {
   display: flex;
   flex-direction: column;
   gap: var(--espacio-8);
+}
+
+@media (min-width: 900px) {
+  .contenedor-generos-catalogo .generos-fila {
+    padding-right: clamp(96px, 20vw, 280px);
+  }
 }
 
 .generos-superior {
@@ -16,9 +27,18 @@
   align-items: center;
 }
 
+.generos-superior-catalogo {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
 .generos-titulo {
   margin: 0;
   color: var(--texto-principal);
+}
+
+.generos-descripcion {
+  color: var(--texto-secundario);
 }
 
 .generos-enlace {
@@ -37,15 +57,45 @@
 
 .genero-caja {
   position: relative;
+  display: block;
   overflow: hidden;
+  width: 100%;
   height: clamp(140px, 11vw, 176px);
+  margin: 0;
   padding: var(--espacio-4);
+  border: 0;
   border-radius: var(--radio-lg);
+  text-align: left;
+  font: inherit;
+  line-height: inherit;
+  color: inherit;
+  appearance: none;
+  -webkit-appearance: none;
+  background: transparent;
+}
+
+button.genero-caja {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  cursor: pointer;
+}
+
+.genero-caja.seleccionado::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border: 3px solid var(--fijo-blanco);
+  border-radius: inherit;
+  pointer-events: none;
 }
 
 .genero-caja-nombre {
   position: relative;
   z-index: 1;
+  display: block;
   margin: 0;
   color: var(--fijo-negro);
 }
@@ -79,5 +129,11 @@
     max-width: 100px;
     right: 4%;
     bottom: -18%;
+  }
+}
+
+@media (max-width: 899px) {
+  .contenedor-generos-catalogo .generos-lista {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }

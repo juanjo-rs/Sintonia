@@ -22,8 +22,11 @@ const IMAGENES = [
   kilometro41,
 ];
 
-const Destacados = ({ textos }) => {
-  const textoD = textos?.paginas?.inicioPublico?.destacados;
+const Destacados = ({ textos, variante = "inicio" }) => {
+  const esCatalogo = variante === "catalogo";
+  const textoD = esCatalogo
+    ? textos?.paginas?.catalogo?.destacados
+    : textos?.paginas?.inicioPublico?.destacados;
   const { albumes } = useAlbumes();
   const [movil, setMovil] = useState(
     () => window.matchMedia("(max-width: 899px)").matches
@@ -37,16 +40,20 @@ const Destacados = ({ textos }) => {
   }, []);
 
   return (
-    <div className="contenedor-destacados">
-      <div className="contenedor destacados-fila">
+    <div
+      className={`contenedor-destacados${esCatalogo ? " contenedor-destacados-catalogo" : ""}`}
+    >
+      <div className={`${esCatalogo ? "contenedor-2" : "contenedor"} destacados-fila`}>
         <div className="destacados-superior">
           <p className={`destacados-titulo ${movil ? "titular-h3" : "titular-h2"}`}>
             {textoD?.titulo}
           </p>
-          <a href={DESTINOS.descubrirMas} className="destacados-enlace cuerpo-p-fuerte">
-            {textoD?.enlaces?.descubrirMas}
-            <Icono nombre="flecha" />
-          </a>
+          {textoD?.enlaces?.descubrirMas && (
+            <a href={DESTINOS.descubrirMas} className="destacados-enlace cuerpo-p-fuerte">
+              {textoD.enlaces.descubrirMas}
+              <Icono nombre="flecha" />
+            </a>
+          )}
         </div>
         {albumes.length > 0 && (
           <div className="destacados-lista">
