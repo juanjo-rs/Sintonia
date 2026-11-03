@@ -32,10 +32,7 @@ const App = () => {
         idioma={idioma}
         generos={generos}
       />
-      <Destacados
-        textos={textos}
-        generos={generos}
-      />
+      <Destacados textos={textos} />
       <Generos
         textos={textos}
         generos={generos}

@@ -22,9 +22,9 @@ const IMAGENES = [
   kilometro41,
 ];
 
-const Destacados = ({ textos, generos }) => {
+const Destacados = ({ textos }) => {
   const textoD = textos?.paginas?.inicioPublico?.destacados;
-  const { albumes } = useAlbumes(generos);
+  const { albumes } = useAlbumes();
   const [movil, setMovil] = useState(
     () => window.matchMedia("(max-width: 899px)").matches
   );
