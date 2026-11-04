@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import "./Destacados.css";
 import Icono from "./Icono";
 import { useAlbumes } from "../hooks/useAlbumes";
@@ -11,6 +12,7 @@ import kilometro41 from "../assets/portadas/album-kilometro-41.png";
 
 const DESTINOS = {
   descubrirMas: "#descubrir-mas",
+  catalogo: "/catalogo",
 };
 
 const IMAGENES = [
@@ -27,6 +29,7 @@ const Destacados = ({ textos, variante = "inicio" }) => {
   const textoD = esCatalogo
     ? textos?.paginas?.catalogo?.destacados
     : textos?.paginas?.inicioPublico?.destacados;
+  const verCatalogo = textos?.paginas?.inicioPublico?.generos?.enlaces?.verCatalogo;
   const { albumes } = useAlbumes();
   const [movil, setMovil] = useState(
     () => window.matchMedia("(max-width: 899px)").matches
@@ -39,6 +42,11 @@ const Destacados = ({ textos, variante = "inicio" }) => {
     return () => consulta.removeEventListener("change", actualizar);
   }, []);
 
+  const enlaceInicioMovil = !esCatalogo && movil && verCatalogo;
+  const etiquetaEnlace = enlaceInicioMovil
+    ? verCatalogo
+    : textoD?.enlaces?.descubrirMas;
+
   return (
     <div
       className={`contenedor-destacados${esCatalogo ? " contenedor-destacados-catalogo" : ""}`}
@@ -48,12 +56,18 @@ const Destacados = ({ textos, variante = "inicio" }) => {
           <p className={`destacados-titulo ${movil ? "titular-h3" : "titular-h2"}`}>
             {textoD?.titulo}
           </p>
-          {textoD?.enlaces?.descubrirMas && (
-            <a href={DESTINOS.descubrirMas} className="destacados-enlace cuerpo-p-fuerte">
-              {textoD.enlaces.descubrirMas}
-              <Icono nombre="flecha" />
-            </a>
-          )}
+          {etiquetaEnlace &&
+            (enlaceInicioMovil ? (
+              <Link to={DESTINOS.catalogo} className="destacados-enlace cuerpo-p-fuerte">
+                {etiquetaEnlace}
+                <Icono nombre="flecha" />
+              </Link>
+            ) : (
+              <a href={DESTINOS.descubrirMas} className={`${esCatalogo && movil ? "destacado-no-enlace" : "destacados-enlace cuerpo-p-fuerte"}`}>
+                {etiquetaEnlace}
+                <Icono nombre="flecha" />
+              </a>
+            ))}
         </div>
         {albumes.length > 0 && (
           <div className="destacados-lista">

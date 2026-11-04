@@ -90,4 +90,8 @@
   .contenedor-destacados-catalogo .destacados-caja {
     background: var(--fondo-elevada);
   }
+
+  .destacado-no-enlace{
+    display: none;
+  }
 }
