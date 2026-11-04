@@ -9,6 +9,7 @@ const DESTINOS = {
   ingresar: "#ingresar",
   crearCuenta: "#crear-cuenta",
   terminos: "#terminos",
+  accesibilidad: "#accesibilidad"
 };
 
 const RUTAS_APP = new Set(["/", "/catalogo"]);
