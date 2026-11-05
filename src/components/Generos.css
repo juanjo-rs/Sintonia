@@ -47,6 +47,11 @@
   align-items: center;
   gap: var(--espacio-2);
   text-decoration: none;
+  transition: color 0.2s ease, translate 0.2s ease;
+}
+.generos-enlace:hover{
+  color: var(--texto-secundario);
+  translate: 4px 0;
 }
 
 .generos-lista {
@@ -72,6 +77,10 @@
   appearance: none;
   -webkit-appearance: none;
   background: transparent;
+  transition: translate 0.2s ease;
+}
+.genero-caja:hover{
+  translate: 0 -6px;
 }
 
 button.genero-caja {

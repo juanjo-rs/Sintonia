@@ -27,6 +27,11 @@
   gap: var(--espacio-4);
   padding: var(--espacio-4) 0;
   border-bottom: 1px solid var(--borde-sutil);
+  transition: background-color 0.2s ease, translate 0.2s ease;
+}
+
+.cancion-fila:hover {
+  translate: 6px 0;
 }
 
 .cancion-fila:first-child {

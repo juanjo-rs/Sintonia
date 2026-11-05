@@ -41,6 +41,11 @@
   padding: clamp(12px, 1.5cqi, 16px);
   border-radius: var(--radio-lg);
   background: transparent;
+  transition: translate 0.2s ease;
+}
+
+.album-genero-caja:hover {
+  translate: 0 -6px;
 }
 
 .albumes-genero-lista.es-dos .album-genero-caja {

@@ -157,11 +157,13 @@
   font-size: 14px;
   line-height: 20px;
   letter-spacing: 0;
+  transition: color 0.2s ease, translate 0.2s ease;
 }
 
 .navbar-inicio:hover,
 .navbar-catalogo:hover {
   color: var(--marca-primario-hover);
+  translate: 0 -2px;
 }
 
 .navbar-acciones {
@@ -232,11 +234,12 @@
   background: transparent;
   text-decoration: none;
   white-space: nowrap;
-  transition: color 200ms ease-out;
+  transition: color 200ms ease-out, translate 200ms ease-out;
 }
 
 .navbar-ingresar:hover {
   color: var(--marca-primario-hover);
+  translate: 0 -4px;
 }
 
 .navbar-ingresar-texto {
@@ -279,12 +282,13 @@
   background: var(--marca-primario);
   text-decoration: none;
   white-space: nowrap;
-  transition: background-color 200ms ease-out;
+  transition: background-color 200ms ease-out, translate 200ms ease-out;
 }
 
 .navbar-crearcuenta:hover {
   background: var(--marca-primario-hover);
   color: var(--texto-sobre-marca);
+  translate: 0 -4px;
 }
 
 .navbar-crearcuenta-texto {

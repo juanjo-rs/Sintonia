@@ -32,6 +32,11 @@
   align-items: center;
   gap: var(--espacio-2);
   text-decoration: none;
+  transition: color 0.2s ease, translate 0.2s ease;
+}
+.destacados-enlace:hover{
+  color: var(--texto-secundario);
+  translate: 4px 0;
 }
 
 .destacados-lista {
@@ -48,6 +53,11 @@
   padding: var(--espacio-4);
   border-radius: var(--radio-lg);
   background: var(--fondo-superficie);
+  transition: translate 0.2s ease, box-shadow 0.2s ease;
+}
+.destacados-caja:hover{
+  translate: 0 -6px;
+  box-shadow: var(--sombra-tarjeta);
 }
 
 .destacados-caja-imagen {

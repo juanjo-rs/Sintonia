@@ -29,6 +29,11 @@
   align-items: center;
   gap: var(--espacio-3);
   width: var(--artista-tam);
+  transition: translate 0.2s ease;
+}
+
+.artista-caja:hover {
+  translate: 0 -6px;
 }
 
 .artista-avatar {

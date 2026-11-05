@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useOutletContext } from "react-router-dom";
 import Generos from "../components/Generos";
 import Destacados from "../components/Destacados";
@@ -27,6 +27,34 @@ const Catalogo = () => {
 
   const textoVacio = textos?.paginas?.catalogo?.vacio;
   const detalleVisible = Boolean(generoId) && errorGenero !== "no_encontrado";
+  const detalle = useRef(null);
+  const bajar = useRef(false);
+
+  function elegirGenero(id) {
+    bajar.current = Boolean(id);
+    setGeneroId(id);
+  }
+
+  useEffect(() => {
+    if (!bajar.current || !detalleVisible) return;
+    const hayDetalle =
+      artistas.length > 0 ||
+      albumes.length > 0 ||
+      pistas.length > 0 ||
+      errorGenero === "error";
+    if (!hayDetalle) return;
+
+    const reducido = document.documentElement.hasAttribute("data-movimiento-reducido");
+    const marco = requestAnimationFrame(() => {
+      if (!bajar.current) return;
+      bajar.current = false;
+      detalle.current?.scrollIntoView({
+        behavior: reducido ? "auto" : "smooth",
+        block: "start",
+      });
+    });
+    return () => cancelAnimationFrame(marco);
+  }, [detalleVisible, generoId, artistas, albumes, pistas, errorGenero]);
 
   return (
     <div className="catalogo-cuerpo">
@@ -35,10 +63,10 @@ const Catalogo = () => {
         generos={generos}
         seleccionable
         generoId={generoId}
-        onSeleccionarGenero={setGeneroId}
+        onSeleccionarGenero={elegirGenero}
       />
       {detalleVisible ? (
-        <>
+        <div ref={detalle} className="catalogo-detalle">
           <Artistas textos={textos} artistas={artistas} />
           <Albumes
             textos={textos}
@@ -53,7 +81,7 @@ const Catalogo = () => {
               <p className="cuerpo-m">{textoVacio.texto}</p>
             </div>
           )}
-        </>
+        </div>
       ) : (
         <Destacados textos={textos} variante="catalogo" />
       )}

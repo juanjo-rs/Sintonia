@@ -42,9 +42,11 @@
   padding: 16px 32px;
   border-radius: var(--radio-completo);
   background-color: var(--fijo-negro);
+  transition: background-color 0.2s ease, translate 0.2s ease;
 }
 .cta-boton:hover{
-    background-color: var(--fondo-superficie) ;
+    background-color: var(--fondo-superficie);
+    translate: 0 -6px;
 }
 @media (min-width: 900px) {
   .cta-titulo {

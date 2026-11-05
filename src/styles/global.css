@@ -46,12 +46,103 @@ html[data-contraste] {
   --texto-marca: #d6f97a;
 }
 
+@keyframes entrar {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes flotar {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 -12px;
+  }
+}
+
+.hero .contenedor-hero,
+.contenedor-visual,
+.contenedor-destacados,
+.contenedor-generos,
+.contenedor-cta,
+.contenedor-artistas,
+.contenedor-albumes-genero,
+.contenedor-canciones {
+  animation: entrar 0.65s ease both;
+}
+
+.destacados-caja,
+.genero-caja,
+.artista-caja,
+.album-genero-caja,
+.cancion-fila {
+  animation: entrar 0.55s ease both;
+}
+
+.destacados-lista > :nth-child(2),
+.generos-lista > :nth-child(2),
+.artistas-lista > :nth-child(2),
+.albumes-genero-lista > :nth-child(2),
+.canciones-lista > :nth-child(2) {
+  animation-delay: 0.06s;
+}
+.destacados-lista > :nth-child(3),
+.generos-lista > :nth-child(3),
+.artistas-lista > :nth-child(3),
+.albumes-genero-lista > :nth-child(3),
+.canciones-lista > :nth-child(3) {
+  animation-delay: 0.12s;
+}
+.destacados-lista > :nth-child(4),
+.generos-lista > :nth-child(4),
+.artistas-lista > :nth-child(4),
+.albumes-genero-lista > :nth-child(4),
+.canciones-lista > :nth-child(4) {
+  animation-delay: 0.18s;
+}
+.destacados-lista > :nth-child(5),
+.generos-lista > :nth-child(5),
+.artistas-lista > :nth-child(5),
+.canciones-lista > :nth-child(5) {
+  animation-delay: 0.24s;
+}
+.destacados-lista > :nth-child(6),
+.generos-lista > :nth-child(6),
+.artistas-lista > :nth-child(6),
+.canciones-lista > :nth-child(6) {
+  animation-delay: 0.3s;
+}
+.generos-lista > :nth-child(7),
+.canciones-lista > :nth-child(7) {
+  animation-delay: 0.36s;
+}
+.generos-lista > :nth-child(8),
+.canciones-lista > :nth-child(8) {
+  animation-delay: 0.42s;
+}
+.generos-lista > :nth-child(9) { animation-delay: 0.48s; }
+.generos-lista > :nth-child(10) { animation-delay: 0.54s; }
+.generos-lista > :nth-child(11) { animation-delay: 0.6s; }
+.generos-lista > :nth-child(12) { animation-delay: 0.66s; }
+
 html[data-movimiento-reducido] *,
 html[data-movimiento-reducido] *::before,
 html[data-movimiento-reducido] *::after {
   animation: none !important;
   transition: none !important;
   scroll-behavior: auto !important;
+}
+
+html[data-movimiento-reducido] *:hover,
+html[data-movimiento-reducido] *:focus-visible {
+  translate: none !important;
 }
 
 html[data-enlaces-subrayados] a {

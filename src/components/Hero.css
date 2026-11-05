@@ -34,6 +34,21 @@
   position: absolute;
   border-radius: 28px;
   box-shadow: var(--sombra-flotante);
+  animation: flotar 5.5s ease-in-out infinite;
+}
+
+.collage-rayas {
+  animation-delay: 0.4s;
+}
+
+.collage-ondas {
+  animation-duration: 6.2s;
+  animation-delay: 0.9s;
+}
+
+.collage-nota {
+  animation-duration: 4.8s;
+  animation-delay: 0.2s;
 }
 
 .collage-principal {
@@ -212,10 +227,11 @@
     justify-content: center;
     align-items: center;
     white-space: nowrap;
-    transition: background-color 0.2s ease;
+    transition: background-color 0.2s ease, translate 0.2s ease;
 }
 .hero-boton-cuenta:hover {
     background-color: var(--marca-primario-hover);
+    translate: 0 -8px;
 }
 .hero-boton-catalogo{
     width: auto;
@@ -230,10 +246,11 @@
     justify-content: center;
     align-items: center;
     white-space: nowrap;
-    transition: background-color 0.2s ease;
+    transition: background-color 0.2s ease, translate 0.2s ease;
 }
 .hero-boton-catalogo:hover {
     background-color: var(--fondo-superficie);
+    translate: 0 -8px;
 }
 
 @media (max-width: 1100px) {

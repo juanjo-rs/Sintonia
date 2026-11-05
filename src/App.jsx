@@ -4,10 +4,18 @@ import Layout from "./components/Layout";
 import Inicio from "./pages/Inicio";
 import Catalogo from "./pages/Catalogo";
 import { useTextos } from "./hooks/useTextos";
+import { guardarCookie, idiomaInicial, leerCookie } from "./components/Cookies";
 import "./App.css";
 
 const App = () => {
-  const [idioma, setIdioma] = useState("es");
+  const [idioma, setIdioma] = useState(idiomaInicial);
+
+  function cambiarIdioma(nuevo) {
+    setIdioma(nuevo);
+    if (leerCookie("consentimiento") === "aceptado") {
+      guardarCookie("idioma", nuevo);
+    }
+  }
   const { textos, cargando, error } = useTextos(idioma);
 
   useEffect(() => {
@@ -23,7 +31,7 @@ const App = () => {
             cargando={cargando}
             error={error}
             idioma={idioma}
-            onCambiarIdioma={setIdioma}
+            onCambiarIdioma={cambiarIdioma}
           />
         }
       >

@@ -64,10 +64,12 @@
 .columna-footer-enlace {
   color: var(--texto-principal);
   text-decoration: none;
+  transition: color 0.2s ease, translate 0.2s ease;
 }
 
 .columna-footer-enlace:hover {
-  color: var(--texto-principal);
+  color: var(--texto-marca);
+  translate: 3px 0;
 }
 .contenedor-footer-inferior{
   display: flex;

@@ -9,6 +9,10 @@
   flex: 1 0 auto;
 }
 
+.catalogo-detalle {
+  scroll-margin-top: 88px;
+}
+
 .catalogo-cuerpo {
   box-sizing: border-box;
   width: calc(100% - (var(--espacio-4) * 2));
