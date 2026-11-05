@@ -4,7 +4,7 @@ import Layout from "./components/Layout";
 import Inicio from "./pages/Inicio";
 import Catalogo from "./pages/Catalogo";
 import { useTextos } from "./hooks/useTextos";
-import { guardarCookie, idiomaInicial, leerCookie } from "./components/Cookies";
+import { cookiesAceptadas, guardarCookie, idiomaInicial } from "./cookies";
 import "./App.css";
 
 const App = () => {
@@ -12,7 +12,7 @@ const App = () => {
 
   function cambiarIdioma(nuevo) {
     setIdioma(nuevo);
-    if (leerCookie("consentimiento") === "aceptado") {
+    if (cookiesAceptadas()) {
       guardarCookie("idioma", nuevo);
     }
   }

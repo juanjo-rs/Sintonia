@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { cookiesAceptadas } from "../cookies";
 
 const CLAVE = "sintonia-accesibilidad";
 const TAMANO_MIN = 80;
@@ -30,8 +31,28 @@ function leerGuardado() {
   }
 }
 
+let actuales = null;
+
+export function guardarAccesibilidadConsentida() {
+  if (!actuales || !cookiesAceptadas()) return;
+  try {
+    localStorage.setItem(CLAVE, JSON.stringify(actuales));
+  } catch {
+    /* ignore quota */
+  }
+}
+
+export function borrarAccesibilidadGuardada() {
+  try {
+    localStorage.removeItem(CLAVE);
+  } catch {
+    /* ignore */
+  }
+}
+
 function valoresIniciales() {
   const base = leerSistema();
+  if (!cookiesAceptadas()) return base;
   const guardado = leerGuardado();
   if (!guardado) return base;
   return {
@@ -96,12 +117,9 @@ export function useAccesibilidad() {
   const [valores, setValores] = useState(valoresIniciales);
 
   useEffect(() => {
+    actuales = valores;
     aplicar(valores);
-    try {
-      localStorage.setItem(CLAVE, JSON.stringify(valores));
-    } catch {
-      /* ignore quota */
-    }
+    guardarAccesibilidadConsentida();
   }, [valores]);
 
   function cambiar(parcial) {
