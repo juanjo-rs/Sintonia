@@ -52,7 +52,8 @@
   min-width: 0;
   padding: var(--espacio-4);
   border-radius: var(--radio-lg);
-  background: var(--fondo-superficie);
+  background: var(--fondo-elevada);
+  border: 1px solid var(--borde-sutil);
   transition: translate 0.2s ease, box-shadow 0.2s ease;
 }
 .destacados-caja:hover{

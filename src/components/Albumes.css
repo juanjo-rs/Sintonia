@@ -40,12 +40,14 @@
   min-width: 0;
   padding: clamp(12px, 1.5cqi, 16px);
   border-radius: var(--radio-lg);
-  background: transparent;
-  transition: translate 0.2s ease;
+  background: var(--fondo-elevada);
+  border: 1px solid var(--borde-sutil);
+  transition: translate 0.2s ease, box-shadow 0.2s ease;
 }
 
 .album-genero-caja:hover {
   translate: 0 -6px;
+  box-shadow: var(--sombra-tarjeta);
 }
 
 .albumes-genero-lista.es-dos .album-genero-caja {

@@ -32,6 +32,7 @@ body {
   padding-inline: clamp(var(--espacio-4), 5.56vw, 80px);
 }
 
+/* Alto contraste en tema oscuro (default). */
 html[data-contraste] {
   --fondo-base: #000000;
   --fondo-superficie: #0a0a0a;
@@ -44,6 +45,21 @@ html[data-contraste] {
   --borde-fuerte: #ffffff;
   --marca-primario: #d6f97a;
   --texto-marca: #d6f97a;
+}
+
+/* Alto contraste en tema claro: no vuelve a oscuro. */
+html[data-tema="claro"][data-contraste] {
+  --fondo-base: #ffffff;
+  --fondo-superficie: #ffffff;
+  --fondo-elevada: #f3f1ea;
+  --fondo-sutil: #e8e4da;
+  --texto-principal: #000000;
+  --texto-secundario: #1a1a1a;
+  --texto-terciario: #333333;
+  --borde-sutil: #000000;
+  --borde-fuerte: #000000;
+  --marca-primario: #3d5200;
+  --texto-marca: #2a3800;
 }
 
 @keyframes entrar {

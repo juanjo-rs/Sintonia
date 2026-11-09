@@ -64,8 +64,8 @@
 [data-tema="claro"] {
   --fondo-base: #f6f4ee;
   --fondo-superficie: #ffffff;
-  --fondo-elevada: #ffffff;
-  --fondo-sutil: #ece9e1;
+  --fondo-elevada: #efece4;
+  --fondo-sutil: #e4e0d6;
   --fondo-inverso: #15131c;
   --marca-primario-hover: #b4e235;
   --marca-primario-presionado: #9ccb1f;
@@ -77,14 +77,16 @@
   --texto-terciario: #8b8898;
   --texto-marca: #486200;
   --texto-inverso: #f4f2f7;
-  --borde-sutil: #e3dfd5;
-  --borde-fuerte: #c9c4b8;
+  --borde-sutil: #d4cfc3;
+  --borde-fuerte: #b8b2a4;
   --estado-exito: #178a45;
   --estado-exito-suave: #ddf5e5;
   --estado-alerta: #a86a00;
   --estado-alerta-suave: #fbefd3;
   --estado-error: #c8322b;
   --estado-error-suave: #fbe1df;
+  --sombra-tarjeta: 0px 8px 24px 0px #15131c1f;
+  --sombra-flotante: 0px 24px 64px 0px #15131c29;
 }
 
 /* Estilos de texto de Figma como clases. */
