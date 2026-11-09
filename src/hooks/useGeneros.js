@@ -1,10 +1,18 @@
 import { useEffect, useState } from "react";
+import { guardarCache, leerCache } from "../cacheApi";
 
 const API = "https://yanethm-sintonia-api.fly.dev/api/v1/generos";
+const CLAVE = "generos";
 
 export function useGeneros() {
-  const [generos, setGeneros] = useState([]);
-  const [cargando, setCargando] = useState(true);
+  const [generos, setGeneros] = useState(() => {
+    const guardado = leerCache(CLAVE);
+    return Array.isArray(guardado) ? guardado : [];
+  });
+  const [cargando, setCargando] = useState(() => {
+    const guardado = leerCache(CLAVE);
+    return !(Array.isArray(guardado) && guardado.length > 0);
+  });
   const [error, setError] = useState(false);
 
   useEffect(() => {
@@ -20,10 +28,16 @@ export function useGeneros() {
         if (!respuesta.ok) throw new Error(`HTTP ${respuesta.status}`);
         const datos = await respuesta.json();
         const lista = Array.isArray(datos?.datos) ? datos.datos : [];
+        guardarCache(CLAVE, lista);
         if (vigente) setGeneros(lista);
       } catch (errorConsulta) {
-        if (vigente) {
-          console.error("Error al cargar los géneros:", errorConsulta);
+        if (!vigente) return;
+        console.error("Error al cargar los géneros:", errorConsulta);
+        const guardado = leerCache(CLAVE);
+        if (Array.isArray(guardado) && guardado.length > 0) {
+          setGeneros(guardado);
+          setError(false);
+        } else {
           setError(true);
           setGeneros([]);
         }

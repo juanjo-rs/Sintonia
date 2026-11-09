@@ -1,10 +1,15 @@
 import { useEffect, useState } from "react";
+import { guardarCache, leerCache } from "../cacheApi";
 
 const API =
   "https://yanethm-sintonia-api.fly.dev/api/v1/albumes?orden=populares&limite=6";
+const CLAVE = "albumes-populares";
 
 export function useAlbumes() {
-  const [albumes, setAlbumes] = useState([]);
+  const [albumes, setAlbumes] = useState(() => {
+    const guardado = leerCache(CLAVE);
+    return Array.isArray(guardado) ? guardado : [];
+  });
 
   useEffect(() => {
     const controlador = new AbortController();
@@ -17,10 +22,15 @@ export function useAlbumes() {
         if (!respuesta.ok) throw new Error(`HTTP ${respuesta.status}`);
         const datos = await respuesta.json();
         const lista = Array.isArray(datos?.datos) ? datos.datos : [];
+        guardarCache(CLAVE, lista);
         if (vigente) setAlbumes(lista);
       } catch (errorConsulta) {
-        if (vigente) {
-          console.error("Error al cargar los álbumes:", errorConsulta);
+        if (!vigente) return;
+        console.error("Error al cargar los álbumes:", errorConsulta);
+        const guardado = leerCache(CLAVE);
+        if (Array.isArray(guardado) && guardado.length > 0) {
+          setAlbumes(guardado);
+        } else {
           setAlbumes([]);
         }
       } finally {

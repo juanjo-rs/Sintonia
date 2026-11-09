@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { guardarCache, leerCache } from "../cacheApi";
 
 const API = "https://yanethm-sintonia-api.fly.dev/api/v1/generos";
 
@@ -8,6 +9,19 @@ const vacio = {
   albumes: [],
   pistas: [],
 };
+
+function claveCache(generoId) {
+  return `genero:${generoId}`;
+}
+
+function armarDetalle(datos) {
+  return {
+    genero: datos,
+    artistas: Array.isArray(datos?.artistas) ? datos.artistas : [],
+    albumes: Array.isArray(datos?.albumes) ? datos.albumes : [],
+    pistas: Array.isArray(datos?.pistas) ? datos.pistas : [],
+  };
+}
 
 export function useGeneroDetalle(generoId) {
   const [detalle, setDetalle] = useState(vacio);
@@ -20,6 +34,11 @@ export function useGeneroDetalle(generoId) {
       setCargando(false);
       setError(null);
       return;
+    }
+
+    const guardado = leerCache(claveCache(generoId));
+    if (guardado?.genero || guardado?.id) {
+      setDetalle(armarDetalle(guardado));
     }
 
     const controlador = new AbortController();
@@ -42,17 +61,18 @@ export function useGeneroDetalle(generoId) {
         }
         if (!respuesta.ok) throw new Error(`HTTP ${respuesta.status}`);
         const datos = await respuesta.json();
+        guardarCache(claveCache(generoId), datos);
         if (!vigente) return;
-        setDetalle({
-          genero: datos,
-          artistas: Array.isArray(datos?.artistas) ? datos.artistas : [],
-          albumes: Array.isArray(datos?.albumes) ? datos.albumes : [],
-          pistas: Array.isArray(datos?.pistas) ? datos.pistas : [],
-        });
+        setDetalle(armarDetalle(datos));
         setError(null);
       } catch (errorConsulta) {
-        if (vigente) {
-          console.error("Error al cargar el género:", errorConsulta);
+        if (!vigente) return;
+        console.error("Error al cargar el género:", errorConsulta);
+        const copia = leerCache(claveCache(generoId));
+        if (copia?.genero || copia?.id || Array.isArray(copia?.artistas)) {
+          setDetalle(armarDetalle(copia));
+          setError(null);
+        } else {
           setDetalle(vacio);
           setError("error");
         }
