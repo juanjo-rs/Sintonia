@@ -46,7 +46,8 @@ const IMAGENES_INICIO = [
 ];
 
 function colorDeFondo(token) {
-  if (typeof token !== "string" || !token.startsWith("portada/")) return undefined;
+  if (typeof token !== "string" || !token.includes("/")) return undefined;
+  // API: "portada/3" → --portada-3, "fondo/sutil" → --fondo-sutil (p. ej. Lo-fi)
   return `var(--${token.replace("/", "-")})`;
 }
 

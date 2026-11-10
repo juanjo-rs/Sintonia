@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./Artistas.css";
 
 function colorDeFondo(token) {
-  if (typeof token !== "string" || !token.startsWith("portada/")) return undefined;
+  if (typeof token !== "string" || !token.includes("/")) return undefined;
   return `var(--${token.replace("/", "-")})`;
 }
 
