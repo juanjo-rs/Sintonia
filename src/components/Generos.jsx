@@ -46,9 +46,10 @@ const IMAGENES_INICIO = [
 ];
 
 function colorDeFondo(token) {
-  if (typeof token !== "string" || !token.includes("/")) return undefined;
-  // API: "portada/3" → --portada-3, "fondo/sutil" → --fondo-sutil (p. ej. Lo-fi)
-  return `var(--${token.replace("/", "-")})`;
+  if (typeof token !== "string") return undefined;
+  // Lo-fi (y similares) a veces vienen como fondo/sutil; usamos un color de portada.
+  const valor = token.startsWith("portada/") ? token : "portada/3";
+  return `var(--${valor.replace("/", "-")})`;
 }
 
 const Generos = ({
