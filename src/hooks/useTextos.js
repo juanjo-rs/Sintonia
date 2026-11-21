@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { guardarCache, leerCache } from "../cacheApi";
+import { API_BASE } from "../env";
 
-const API = "https://yanethm-sintonia-api.fly.dev/api/v1/textos";
+const API = `${API_BASE}/textos`;
 
 const CLAVES_ENLACES = ["inicio", "catalogo"];
 

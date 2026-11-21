@@ -54,6 +54,8 @@
   border-radius: var(--radio-lg);
   background: var(--fondo-elevada);
   border: 1px solid var(--borde-sutil);
+  text-decoration: none;
+  color: inherit;
   transition: translate 0.2s ease, box-shadow 0.2s ease;
 }
 .destacados-caja:hover{

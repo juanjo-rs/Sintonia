@@ -1,0 +1,37 @@
+.portada-album {
+  --portada-fondo: var(--portada-2);
+  --portada-figura: var(--portada-4);
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: var(--radio-md);
+  background: var(--portada-fondo);
+  box-shadow: var(--sombra-tarjeta);
+}
+
+.portada-album--rayas {
+  background: repeating-linear-gradient(
+    -32deg,
+    var(--portada-fondo) 0 18px,
+    var(--portada-figura) 18px 36px
+  );
+}
+
+.portada-album--anillos {
+  background:
+    radial-gradient(circle at 50% 50%, transparent 0 28%, var(--portada-figura) 29% 36%, transparent 37% 52%, var(--portada-figura) 53% 58%, transparent 59%),
+    var(--portada-fondo);
+}
+
+.portada-album--puntos {
+  background:
+    radial-gradient(circle at 20% 20%, var(--portada-figura) 0 8%, transparent 9%),
+    radial-gradient(circle at 70% 30%, var(--portada-figura) 0 10%, transparent 11%),
+    radial-gradient(circle at 40% 75%, var(--portada-figura) 0 12%, transparent 13%),
+    var(--portada-fondo);
+}
+
+.portada-album--ondas {
+  background:
+    radial-gradient(circle at 0 100%, var(--portada-figura) 0 22%, var(--portada-fondo) 23% 36%, var(--portada-figura) 37% 48%, var(--portada-fondo) 49% 64%, var(--portada-figura) 65% 100%);
+}

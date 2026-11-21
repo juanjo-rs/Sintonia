@@ -72,7 +72,11 @@ const Destacados = ({ textos, variante = "inicio" }) => {
         {albumes.length > 0 && (
           <div className="destacados-lista">
             {albumes.map((album, indice) => (
-              <div key={album.id} className="destacados-caja">
+              <Link
+                key={album.id}
+                to={`/album/${album.id}`}
+                className="destacados-caja"
+              >
                 {IMAGENES[indice] && (
                   <img className="destacados-caja-imagen" src={IMAGENES[indice]} alt="" />
                 )}
@@ -82,7 +86,7 @@ const Destacados = ({ textos, variante = "inicio" }) => {
                     <p className="destacados-caja-autor cuerpo-p">{album.artista.nombre}</p>
                   )}
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         )}

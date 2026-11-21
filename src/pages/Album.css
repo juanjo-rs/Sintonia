@@ -1,0 +1,281 @@
+.pagina-album {
+  padding-bottom: var(--espacio-16);
+}
+
+.album-estado {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-4);
+  padding-block: var(--espacio-16);
+}
+
+.album-volver {
+  color: var(--texto-marca);
+  text-decoration: none;
+  width: fit-content;
+}
+
+.album-hero {
+  padding-block: var(--espacio-6) var(--espacio-8);
+}
+
+.album-hero-fila {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(180px, 280px) minmax(0, 1fr);
+  gap: var(--espacio-8);
+  align-items: end;
+}
+
+.album-atras {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radio-completo);
+  background: transparent;
+  color: var(--texto-principal);
+  cursor: pointer;
+}
+
+.album-atras .icono,
+.album-atras svg {
+  transform: rotate(180deg);
+}
+
+.album-hero-portada {
+  width: 100%;
+  max-width: 280px;
+  border-radius: var(--radio-lg);
+}
+
+.album-hero-textos {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-3);
+  min-width: 0;
+}
+
+.album-tipo {
+  display: inline-flex;
+  width: fit-content;
+  padding: 4px 10px;
+  border-radius: var(--radio-completo);
+  background: var(--marca-secundario-suave);
+  color: var(--marca-secundario);
+  font-family: var(--fuente-inter);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 16px;
+}
+
+.album-titulo {
+  margin: 0;
+  color: var(--texto-principal);
+  overflow-wrap: anywhere;
+}
+
+.album-meta {
+  margin: 0;
+  color: var(--texto-secundario);
+}
+
+.album-tabla-bloque {
+  padding-bottom: var(--espacio-8);
+}
+
+.album-tabla {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.album-lista-movil {
+  display: none;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex-direction: column;
+  gap: var(--espacio-2);
+}
+
+.album-tabla-cabecera,
+.album-tabla-fila {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr) 160px 88px;
+  gap: var(--espacio-4);
+  align-items: center;
+  padding: 10px 12px;
+}
+
+.album-tabla-cabecera {
+  color: var(--texto-terciario);
+  border-bottom: 1px solid var(--borde-sutil);
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+}
+
+.album-tabla-fila {
+  border-radius: var(--radio-md);
+  color: var(--texto-secundario);
+  transition: background-color 0.15s ease;
+}
+
+.album-tabla-fila:hover {
+  background: var(--fondo-sutil);
+}
+
+.album-pista-textos {
+  min-width: 0;
+}
+
+.album-pista-textos p {
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.album-pista-textos .cuerpo-m-fuerte {
+  color: var(--texto-principal);
+}
+
+.album-pista-artista {
+  color: var(--texto-secundario);
+}
+
+.album-col-repros,
+.album-col-duracion {
+  text-align: right;
+}
+
+.album-fecha {
+  margin: var(--espacio-6) 0 0;
+  color: var(--texto-terciario);
+}
+
+.album-mas {
+  padding-top: var(--espacio-8);
+}
+
+.album-mas-fila {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-6);
+}
+
+.album-mas-titulo {
+  margin: 0;
+  color: var(--texto-principal);
+}
+
+.album-mas-lista {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: var(--espacio-6);
+}
+
+.album-mas-caja {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-3);
+  min-width: 0;
+  padding: var(--espacio-4);
+  border-radius: var(--radio-lg);
+  background: var(--fondo-elevada);
+  border: 1px solid var(--borde-sutil);
+  text-decoration: none;
+  color: inherit;
+  transition: translate 0.2s ease, box-shadow 0.2s ease;
+}
+
+.album-mas-caja:hover {
+  translate: 0 -6px;
+  box-shadow: var(--sombra-tarjeta);
+}
+
+.album-mas-textos p {
+  margin: 0;
+}
+
+.album-mas-textos .cuerpo-p-fuerte {
+  color: var(--texto-principal);
+}
+
+.album-mas-textos .cuerpo-p {
+  color: var(--texto-secundario);
+}
+
+@media (max-width: 899px) {
+  .album-hero {
+    padding-top: var(--espacio-2);
+  }
+
+  .album-hero-fila {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+    gap: var(--espacio-6);
+  }
+
+  .album-atras {
+    display: inline-flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .album-hero-portada {
+    max-width: min(72vw, 280px);
+    margin-top: var(--espacio-8);
+  }
+
+  .album-hero-textos {
+    align-items: center;
+    width: 100%;
+  }
+
+  .album-titulo {
+    font-size: clamp(32px, 8vw, 40px);
+    line-height: 1.15;
+  }
+
+  .album-meta {
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .album-tabla--escritorio {
+    display: none;
+  }
+
+  .album-lista-movil {
+    display: flex;
+  }
+
+  .album-pista-movil {
+    display: flex;
+    align-items: center;
+    gap: var(--espacio-3);
+    padding: var(--espacio-2) 0;
+  }
+
+  .album-pista-mini {
+    flex: 0 0 48px;
+    width: 48px;
+    border-radius: var(--radio-sm);
+    box-shadow: none;
+  }
+
+  .album-fecha {
+    display: none;
+  }
+
+  .album-mas {
+    display: none;
+  }
+}

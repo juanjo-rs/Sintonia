@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { guardarCache, leerCache } from "../cacheApi";
+import { API_BASE } from "../env";
 
-const API =
-  "https://yanethm-sintonia-api.fly.dev/api/v1/albumes?orden=populares&limite=6";
+const API = `${API_BASE}/albumes?orden=populares&limite=6`;
 const CLAVE = "albumes-populares";
 
 export function useAlbumes() {

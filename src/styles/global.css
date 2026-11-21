@@ -90,7 +90,8 @@ html[data-tema="claro"][data-contraste] {
 .contenedor-cta,
 .contenedor-artistas,
 .contenedor-albumes-genero,
-.contenedor-canciones {
+.contenedor-canciones,
+.pagina-album {
   animation: entrar 0.65s ease both;
 }
 

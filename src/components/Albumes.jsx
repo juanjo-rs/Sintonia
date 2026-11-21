@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import "./Albumes.css";
 import kilometro41 from "../assets/portadas/album-kilometro-41.png";
 import cartasSinEnviar from "../assets/portadas/genero-2-cartas-sin-enviar.png";
@@ -80,7 +81,11 @@ const Albumes = ({ textos, generoId, generoNombre, albumes }) => {
           className={`albumes-genero-lista${lista.length === 2 ? " es-dos" : ""}`}
         >
           {lista.map((album, indice) => (
-            <div key={album.id} className="album-genero-caja">
+            <Link
+              key={album.id}
+              to={`/album/${album.id}`}
+              className="album-genero-caja"
+            >
               <img
                 className="album-genero-imagen"
                 src={imagenDeAlbum(generoId, album.id, indice)}
@@ -98,7 +103,7 @@ const Albumes = ({ textos, generoId, generoNombre, albumes }) => {
                   </p>
                 )}
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>

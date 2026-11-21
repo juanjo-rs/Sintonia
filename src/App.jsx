@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
 import Inicio from "./pages/Inicio";
 import Catalogo from "./pages/Catalogo";
+import Album from "./pages/Album";
 import { useTextos } from "./hooks/useTextos";
 import { cookiesAceptadas, guardarCookie, idiomaInicial } from "./cookies";
 import "./App.css";
@@ -37,6 +38,7 @@ const App = () => {
       >
         <Route index element={<Inicio />} />
         <Route path="catalogo" element={<Catalogo />} />
+        <Route path="album/:albumId" element={<Album />} />
       </Route>
     </Routes>
   );
