@@ -8,10 +8,11 @@ Requiere Node.js 20.19 o posterior en la rama 20, o Node.js 22.12 o posterior.
 
 ```sh
 npm ci
+cp .env.example .env
 npm run dev
 ```
 
-Abre la dirección que muestre Vite. El inicio queda en `/` y el catálogo en `/catalogo`.
+Abre la dirección que muestre Vite. El inicio queda en `/`, el catálogo en `/catalogo` y el detalle de álbum en `/album/:id`.
 
 ```sh
 npm run build
@@ -29,15 +30,19 @@ npm run preview
 - `src/hooks/useTextos.js`: textos de interfaz según idioma.
 - `src/hooks/useGeneros.js`: listado de géneros.
 - `src/hooks/useAlbumes.js`: álbumes destacados/populares.
+- `src/hooks/useAlbumDetalle.js`: detalle de un álbum (pistas y más del artista).
 - `src/hooks/useGeneroDetalle.js`: detalle de un género (artistas, álbumes, pistas).
 - `src/hooks/useGeneroEnUrl.js`: persiste el género elegido en `?genero=`.
 - `src/hooks/useAccesibilidad.js`: tamaño de texto y preferencias del panel.
 - `vercel.json`: rewrite SPA hacia `index.html`.
+- `.env`: `VITE_API_URL` con la base de la API.
+- `src/env.js`: exporta `API_BASE` para los hooks.
 
 ## Rutas
 
 - `/`: home público.
 - `/catalogo`: catálogo; al elegir un género se añade `?genero=<id>`.
+- `/album/:albumId`: detalle del álbum (clic en cualquier tarjeta de álbum).
 
 `App.jsx` monta el idioma, carga textos y envuelve las páginas en `Layout` (Navbar, contenido, Footer y cookies).
 
@@ -71,7 +76,9 @@ Las portadas locales en `src/assets/portadas/` complementan la presentación cua
 
 La interfaz carga textos, géneros y álbumes desde la API remota. Sin red o si la API falla, los hooks dejan listas vacías o estado de error; el navbar valida la forma de los textos antes de usarlos.
 
-API configurada: `https://yanethm-sintonia-api.fly.dev/api/v1`.
+API base (`.env` → `VITE_API_URL`):
+
+`https://yanethm-sintonia-api.fly.dev/api/v1`
 
 Endpoints usados:
 
@@ -79,6 +86,7 @@ Endpoints usados:
 - `GET /generos`
 - `GET /generos/:id`
 - `GET /albumes?orden=populares&limite=6`
+- `GET /albumes/:id`
 
 Las listas llegan en `datos` y los textos en `textos`. Consulta el [diseño y contrato](https://yanethm-sintonia-api.fly.dev/docs/diseno/) antes de adaptar campos. Los tokens de referencia están en [tokens.css](https://yanethm-sintonia-api.fly.dev/docs/diseno/tokens.css).
 
