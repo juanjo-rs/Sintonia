@@ -1,12 +1,15 @@
 .portada-album {
   --portada-fondo: var(--portada-2);
   --portada-figura: var(--portada-4);
+  --portada-detalle: var(--fijo-blanco);
   display: block;
   width: 100%;
   aspect-ratio: 1;
   border-radius: var(--radio-md);
   background: var(--portada-fondo);
   box-shadow: var(--sombra-tarjeta);
+  overflow: hidden;
+  position: relative;
 }
 
 .portada-album--rayas {
@@ -19,19 +22,54 @@
 
 .portada-album--anillos {
   background:
-    radial-gradient(circle at 50% 50%, transparent 0 28%, var(--portada-figura) 29% 36%, transparent 37% 52%, var(--portada-figura) 53% 58%, transparent 59%),
+    radial-gradient(
+      circle at 0 100%,
+      transparent 0 28%,
+      var(--portada-figura) 29% 38%,
+      transparent 39% 52%,
+      var(--portada-figura) 53% 60%,
+      transparent 61%
+    ),
     var(--portada-fondo);
 }
 
 .portada-album--puntos {
   background:
-    radial-gradient(circle at 20% 20%, var(--portada-figura) 0 8%, transparent 9%),
-    radial-gradient(circle at 70% 30%, var(--portada-figura) 0 10%, transparent 11%),
-    radial-gradient(circle at 40% 75%, var(--portada-figura) 0 12%, transparent 13%),
+    radial-gradient(circle, var(--portada-figura) 0 38%, transparent 40%) 16% 16% / 22% 22% no-repeat,
+    radial-gradient(circle, var(--portada-figura) 0 38%, transparent 40%) 50% 16% / 22% 22% no-repeat,
+    radial-gradient(circle, var(--portada-figura) 0 38%, transparent 40%) 84% 16% / 22% 22% no-repeat,
+    radial-gradient(circle, var(--portada-figura) 0 38%, transparent 40%) 16% 50% / 22% 22% no-repeat,
+    radial-gradient(circle, var(--portada-figura) 0 38%, transparent 40%) 50% 50% / 22% 22% no-repeat,
+    radial-gradient(circle, var(--portada-figura) 0 38%, transparent 40%) 84% 50% / 22% 22% no-repeat,
+    radial-gradient(circle, var(--portada-figura) 0 38%, transparent 40%) 16% 84% / 22% 22% no-repeat,
+    radial-gradient(circle, var(--portada-figura) 0 38%, transparent 40%) 50% 84% / 22% 22% no-repeat,
+    radial-gradient(circle, var(--portada-figura) 0 38%, transparent 40%) 84% 84% / 22% 22% no-repeat,
     var(--portada-fondo);
 }
 
 .portada-album--ondas {
   background:
-    radial-gradient(circle at 0 100%, var(--portada-figura) 0 22%, var(--portada-fondo) 23% 36%, var(--portada-figura) 37% 48%, var(--portada-fondo) 49% 64%, var(--portada-figura) 65% 100%);
+    radial-gradient(
+      circle at 0 100%,
+      var(--portada-figura) 0 22%,
+      var(--portada-fondo) 23% 36%,
+      var(--portada-figura) 37% 48%,
+      var(--portada-fondo) 49% 64%,
+      var(--portada-figura) 65% 100%
+    );
+}
+
+.portada-album--colina {
+  background:
+    radial-gradient(
+      circle at 78% 22%,
+      var(--portada-detalle) 0 9%,
+      transparent 10%
+    ),
+    radial-gradient(
+      circle at 50% 128%,
+      var(--portada-figura) 0 52%,
+      transparent 53%
+    ),
+    var(--portada-fondo);
 }
