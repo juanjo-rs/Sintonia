@@ -1,7 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useOutletContext, useParams } from "react-router-dom";
 import Icono from "../components/Icono";
-import PortadaAlbum from "../components/PortadaAlbum";
 import { useAlbumDetalle } from "../hooks/useAlbumDetalle";
 import {
   anioDeFecha,
@@ -10,6 +9,7 @@ import {
   formatearMinutos,
   formatearReproducciones,
 } from "../utils/formato";
+import { imagenPortadaAlbum } from "../utils/portadasAlbumes";
 import "./Album.css";
 
 const Album = () => {
@@ -19,6 +19,9 @@ const Album = () => {
   const { album, pistas, masDelArtista, cargando, error } =
     useAlbumDetalle(albumId);
   const copia = textos?.paginas?.album;
+  const [movil, setMovil] = useState(
+    () => window.matchMedia("(max-width: 899px)").matches,
+  );
 
   useEffect(() => {
     if (!album?.titulo || !copia?.seo?.titulo) return;
@@ -26,6 +29,13 @@ const Album = () => {
       titulo: album.titulo,
     });
   }, [album?.titulo, copia?.seo?.titulo]);
+
+  useEffect(() => {
+    const consulta = window.matchMedia("(max-width: 899px)");
+    const actualizar = (evento) => setMovil(evento.matches);
+    consulta.addEventListener("change", actualizar);
+    return () => consulta.removeEventListener("change", actualizar);
+  }, []);
 
   if (cargando && !album) {
     return (
@@ -64,19 +74,37 @@ const Album = () => {
   const duracionEtiqueta = etiquetaConPlantilla(copia?.encabezado?.duracion, {
     minutos: formatearMinutos(album.duracionSeg),
   });
-  const resumen = etiquetaConPlantilla(copia?.encabezado?.etiquetas?.resumen, {
-    artista: album.artista?.nombre || "",
-    anio,
-    canciones: cancionesEtiqueta,
-    duracion: duracionEtiqueta,
-  });
+  const artistaNombre = album.artista?.nombre || "";
+  const metaDetalle = [anio, cancionesEtiqueta, duracionEtiqueta]
+    .filter(Boolean)
+    .join(" · ");
   const tituloMas = etiquetaConPlantilla(copia?.masDelArtista?.titulo, {
-    artista: album.artista?.nombre || "",
+    artista: artistaNombre,
   });
+  const verDiscografia = copia?.masDelArtista?.enlaces?.verDiscografia;
+  const avisoLegal =
+    album.copyright ||
+    album.avisoLegal ||
+    etiquetaConPlantilla(copia?.avisoLegal || copia?.copyright, {
+      anio,
+    }) ||
+    (anio
+      ? `© ${anio} Discos del Ruiz · Audio de ejemplo de uso libre`
+      : null);
 
   const pistasOrdenadas = [...pistas].sort(
     (a, b) => (a?.numero ?? 0) - (b?.numero ?? 0),
   );
+
+  function volver() {
+    if (typeof window.history.state?.idx === "number" && window.history.state.idx > 0) {
+      navigate(-1);
+      return;
+    }
+    navigate("/catalogo");
+  }
+
+  const imagenPortada = imagenPortadaAlbum(album.id);
 
   return (
     <div className="pagina-album">
@@ -85,18 +113,47 @@ const Album = () => {
           <button
             type="button"
             className="album-atras"
-            onClick={() => navigate(-1)}
-            aria-label="Volver"
+            onClick={volver}
+            aria-label={copia?.noEncontrado?.botones?.volver || "Volver"}
           >
             <Icono nombre="flecha" />
           </button>
 
-          <PortadaAlbum portada={album.portada} className="album-hero-portada" />
+          <img
+            className="album-hero-portada"
+            src={imagenPortada}
+            alt=""
+            decoding="async"
+          />
 
           <div className="album-hero-textos">
             <span className="album-tipo">{tipo}</span>
-            <h1 className="album-titulo titular-display">{album.titulo}</h1>
-            {resumen && <p className="album-meta cuerpo-m">{resumen}</p>}
+            <h1
+              className={`album-titulo ${movil ? "titular-h1" : "titular-display"}`}
+            >
+              {album.titulo}
+            </h1>
+            {(artistaNombre || metaDetalle) && (
+              <p className="album-meta">
+                <img
+                  className="album-meta-mini"
+                  src={imagenPortada}
+                  alt=""
+                  decoding="async"
+                />
+                {artistaNombre && (
+                  <span className="album-meta-artista cuerpo-p-fuerte">
+                    {artistaNombre}
+                  </span>
+                )}
+                {artistaNombre && metaDetalle && (
+                  <span className="album-meta-sep cuerpo-p"> · </span>
+                )}
+                {metaDetalle && (
+                  <span className="album-meta-detalle cuerpo-p">{metaDetalle}</span>
+                )}
+              </p>
+            )}
           </div>
         </div>
       </section>
@@ -128,13 +185,21 @@ const Album = () => {
                 <span className="cuerpo-m" role="cell">
                   {pista.numero}
                 </span>
-                <div className="album-pista-textos" role="cell">
-                  <p className="cuerpo-m-fuerte">{pista.titulo}</p>
-                  {pista.artista?.nombre && (
-                    <p className="cuerpo-p album-pista-artista">
-                      {pista.artista.nombre}
-                    </p>
-                  )}
+                <div className="album-pista-celda" role="cell">
+                  <img
+                    className="album-pista-mini"
+                    src={imagenPortada}
+                    alt=""
+                    decoding="async"
+                  />
+                  <div className="album-pista-textos">
+                    <p className="cuerpo-m-fuerte">{pista.titulo}</p>
+                    {pista.artista?.nombre && (
+                      <p className="cuerpo-p album-pista-artista">
+                        {pista.artista.nombre}
+                      </p>
+                    )}
+                  </div>
                 </div>
                 <span className="cuerpo-p album-col-repros" role="cell">
                   {formatearReproducciones(pista.reproducciones)}
@@ -150,9 +215,11 @@ const Album = () => {
           <ul className="album-lista-movil">
             {pistasOrdenadas.map((pista) => (
               <li key={pista.id} className="album-pista-movil">
-                <PortadaAlbum
-                  portada={pista.portada || album.portada}
+                <img
                   className="album-pista-mini"
+                  src={imagenPortada}
+                  alt=""
+                  decoding="async"
                 />
                 <div className="album-pista-textos">
                   <p className="cuerpo-m-fuerte">{pista.titulo}</p>
@@ -167,7 +234,7 @@ const Album = () => {
           </ul>
 
           {album.fechaPublicacion && (
-            <p className="album-fecha detalle-nota">
+            <p className="album-fecha cuerpo-p">
               {new Date(album.fechaPublicacion).toLocaleDateString("es-CO", {
                 day: "numeric",
                 month: "long",
@@ -175,15 +242,32 @@ const Album = () => {
               })}
             </p>
           )}
+          {avisoLegal && (
+            <p className="album-aviso detalle-nota">{avisoLegal}</p>
+          )}
         </div>
       </section>
 
       {masDelArtista.length > 0 && (
         <section className="album-mas">
           <div className="contenedor album-mas-fila">
-            {tituloMas && (
-              <p className="album-mas-titulo titular-h2">{tituloMas}</p>
-            )}
+            <div className="album-mas-cabecera">
+              {tituloMas && (
+                <p
+                  className={`album-mas-titulo ${movil ? "titular-h3" : "titular-h2"}`}
+                >
+                  {tituloMas}
+                </p>
+              )}
+              {verDiscografia && (
+                <Link
+                  to="/catalogo"
+                  className="album-mas-enlace cuerpo-p-fuerte"
+                >
+                  {verDiscografia}
+                </Link>
+              )}
+            </div>
             <div className="album-mas-lista">
               {masDelArtista.map((item) => {
                 const tipoItem =
@@ -201,7 +285,12 @@ const Album = () => {
                     to={`/album/${item.id}`}
                     className="album-mas-caja"
                   >
-                    <PortadaAlbum portada={item.portada} />
+                    <img
+                      className="album-mas-portada"
+                      src={imagenPortadaAlbum(item.id)}
+                      alt=""
+                      decoding="async"
+                    />
                     <div className="album-mas-textos">
                       <p className="cuerpo-p-fuerte">{item.titulo}</p>
                       {meta && <p className="cuerpo-p">{meta}</p>}
