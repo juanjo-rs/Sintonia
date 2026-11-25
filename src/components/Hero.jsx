@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useSesion } from "../context/SesionContext";
 import "./Hero.css";
 
 const DESTINOS = {
@@ -12,6 +13,7 @@ const TEXTO ={
   en: ["The fog rises","up the mountain","and the path sings."]
 }
 const Hero = ({ textos, idioma, generos }) => {
+  const { usuario } = useSesion();
   const textosH = textos?.paginas?.inicioPublico?.hero;
   const TextosCifras = textos?.paginas?.inicioPublico?.cifras;
   const CambioT = TEXTO[idioma] ?? TEXTO.es;
@@ -35,12 +37,14 @@ const Hero = ({ textos, idioma, generos }) => {
           <h1 className= {movil ? "titular-h1" : "titular-gigante"}>{textosH?.titulo}</h1>
           <p className={movil ? "hero-subtitulo cuerpo-m" : "hero-subtitulo cuerpo-g"}>{textosH?.subtitulo}</p>
           <div className="hero-botones">
-            <a
-              href={DESTINOS.crearCuenta}
-              className="hero-boton-cuenta cuerpo-m-fuerte"
-            >
-              {textosH?.botones?.crearCuentaGratis}
-            </a>
+            {!usuario && textosH?.botones?.crearCuentaGratis && (
+              <a
+                href={DESTINOS.crearCuenta}
+                className="hero-boton-cuenta cuerpo-m-fuerte"
+              >
+                {textosH.botones.crearCuentaGratis}
+              </a>
+            )}
             <Link to={DESTINOS.catalogo} className="hero-boton-catalogo cuerpo-m-fuerte">
               {textosH?.botones?.explorarCatalogo}
             </Link>
