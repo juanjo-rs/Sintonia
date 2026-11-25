@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { useSesion } from "../context/SesionContext";
 import "./Cta.css"
 const DESTINOS = {
   crearCuentaGratis: "#crear-cuenta",
 }
 
 const Cta = ({ textos }) => {
+    const { usuario } = useSesion();
     const textoCt = textos?.paginas?.inicioPublico?.cta;
     const [movil, setMovil] = useState(
         () => window.matchMedia("(max-width: 899px)").matches
@@ -17,12 +19,14 @@ const Cta = ({ textos }) => {
     return () => consulta.removeEventListener("change", actualizar);
     }, []);
 
+    if (usuario) return null;
+
     return(
         <div className="contenedor-cta">
             <div className="contenedor">
                 <div className="contenedor-cta-columnas">
                     <div className="cta-informacion">
-                        <h1 className={`cta-titulo ${movil ? "titular-h3" : "titular-h1"}`}>{textoCt?.titulo}</h1>
+                        <h1 className={`cta-titulo ${movil ? "titular-h2" : "titular-h1"}`}>{textoCt?.titulo}</h1>
                         <p className={`cta-texto ${movil ? "cuerpo-p" : "cuerpo-m"}`}>{textoCt?.texto}</p>
                     </div>
                     <div className="cta-boton">
