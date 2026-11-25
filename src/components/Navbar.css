@@ -308,6 +308,160 @@
   font-size: 14px;
 }
 
+.navbar-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radio-completo);
+  background: var(--marca-primario);
+  color: var(--texto-sobre-marca);
+  font-family: var(--fuente-inter);
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.navbar-avatar-menu {
+  flex-shrink: 0;
+  cursor: default;
+  pointer-events: none;
+}
+
+.navbar-usuario {
+  position: relative;
+  display: none;
+}
+
+.navbar-sesion-movil {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espacio-3);
+  width: 100%;
+}
+
+.navbar-sesion-movil-persona {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-3);
+  min-width: 0;
+}
+
+.navbar-avatar-sesion {
+  color: var(--fijo-blanco);
+  cursor: default;
+}
+
+.navbar-sesion-movil-datos {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.navbar-sesion-movil-datos p {
+  margin: 0;
+}
+
+.navbar-sesion-movil-datos .detalle-nota {
+  color: var(--texto-secundario);
+}
+
+.navbar-usuario-menu {
+  position: absolute;
+  top: calc(100% + var(--espacio-2));
+  right: 0;
+  z-index: 50;
+  min-width: 280px;
+  padding: var(--espacio-3);
+  border: 1px solid var(--borde-sutil);
+  border-radius: var(--radio-lg);
+  background: var(--fondo-elevada);
+  box-shadow: var(--sombra-flotante);
+}
+
+.navbar-usuario-cabecera {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-3);
+  padding: var(--espacio-2);
+}
+
+.navbar-usuario-datos {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.navbar-usuario-nombre,
+.navbar-usuario-correo {
+  margin: 0;
+}
+
+.navbar-usuario-nombre {
+  color: var(--texto-principal);
+}
+
+.navbar-usuario-correo {
+  color: var(--texto-secundario);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.navbar-usuario-separador {
+  height: 1px;
+  margin: var(--espacio-2) 0;
+  background: var(--borde-sutil);
+}
+
+.navbar-usuario-item,
+.navbar-cerrar-movil {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espacio-2);
+  width: 100%;
+  padding: 10px 12px;
+  border: 0;
+  border-radius: var(--radio-md);
+  background: transparent;
+  color: var(--texto-principal);
+  font-family: var(--fuente-inter);
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.navbar-usuario-item:hover,
+.navbar-cerrar-movil:hover {
+  background: var(--fondo-sutil);
+}
+
+.navbar-cerrar-movil {
+  flex: 0 0 auto;
+  width: auto;
+  justify-content: center;
+  height: 40px;
+  padding: 8px 16px;
+  border: 1px solid var(--borde-fuerte);
+  border-radius: var(--radio-completo);
+  white-space: nowrap;
+}
+
+.navbar-crearcuenta-inactivo {
+  opacity: 0.55;
+  pointer-events: none;
+  cursor: default;
+}
+
 @media (max-width: 899px) {
   body:has(.navbar.is-abierto) {
     overflow: hidden;
@@ -454,5 +608,13 @@
   .navbar-accesos .navbar-ingresar,
   .navbar-accesos .navbar-crearcuenta {
     width: auto;
+  }
+
+  .navbar-usuario {
+    display: block;
+  }
+
+  .navbar-sesion-movil {
+    display: none;
   }
 }
