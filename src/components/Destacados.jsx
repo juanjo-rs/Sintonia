@@ -3,26 +3,12 @@ import { Link } from "react-router-dom";
 import "./Destacados.css";
 import Icono from "./Icono";
 import { useAlbumes } from "../hooks/useAlbumes";
-import cantoDeGuadua from "../assets/portadas/album-canto-de-guadua.png";
-import todoElRuido from "../assets/portadas/album-todo-el-ruido.png";
-import bajoElGuadual from "../assets/portadas/album-bajo-el-guadual.png";
-import neonYNeblina from "../assets/portadas/album-neon-y-neblina.png";
-import cartasSinEnviar from "../assets/portadas/album-cartas-sin-enviar.png";
-import kilometro41 from "../assets/portadas/album-kilometro-41.png";
+import { imagenPortadaAlbum } from "../utils/portadasAlbumes";
 
 const DESTINOS = {
   descubrirMas: "#descubrir-mas",
   catalogo: "/catalogo",
 };
-
-const IMAGENES = [
-  cantoDeGuadua,
-  todoElRuido,
-  bajoElGuadual,
-  neonYNeblina,
-  cartasSinEnviar,
-  kilometro41,
-];
 
 const Destacados = ({ textos, variante = "inicio" }) => {
   const esCatalogo = variante === "catalogo";
@@ -77,9 +63,11 @@ const Destacados = ({ textos, variante = "inicio" }) => {
                 to={`/album/${album.id}`}
                 className="destacados-caja"
               >
-                {IMAGENES[indice] && (
-                  <img className="destacados-caja-imagen" src={IMAGENES[indice]} alt="" />
-                )}
+                <img
+                  className="destacados-caja-imagen"
+                  src={imagenPortadaAlbum(album.id, indice)}
+                  alt=""
+                />
                 <div className="destacados-caja-textos">
                   <p className="destacados-caja-nombre cuerpo-p-fuerte">{album.titulo}</p>
                   {album.artista?.nombre && (
