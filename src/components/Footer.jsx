@@ -6,13 +6,13 @@ import Logo from "./Logo.jsx";
 const DESTINOS = {
   inicio: "/",
   catalogo: "/catalogo",
-  ingresar: "#ingresar",
+  ingresar: "/ingresar",
   crearCuenta: "#crear-cuenta",
   terminos: "#terminos",
   accesibilidad: "#accesibilidad"
 };
 
-const RUTAS_APP = new Set(["/", "/catalogo"]);
+const RUTAS_APP = new Set(["/", "/catalogo", "/ingresar"]);
 
 const Footer = ({ textos }) => {
   const footerT = textos?.footer;
