@@ -1,9 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Navbar.css";
 import Icono from "./Icono.jsx";
 import Logo from "./Logo.jsx";
 import Accesibilidad from "./Accesibilidad.jsx";
+import { useSesion } from "../context/SesionContext";
 
 const DESTINOS = {
   inicio: "/",
@@ -11,9 +12,14 @@ const DESTINOS = {
 };
 
 const Navbar = ({ textos, cargando, idioma, onCambiarIdioma }) => {
+  const navigate = useNavigate();
+  const { usuario, cerrarSesion } = useSesion();
   const [abierto, setAbierto] = useState(false);
+  const [menuUsuarioAbierto, setMenuUsuarioAbierto] = useState(false);
   const [accesibilidadAbierta, setAccesibilidadAbierta] = useState(false);
   const botonMenu = useRef(null);
+  const botonUsuario = useRef(null);
+  const menuUsuario = useRef(null);
   const botonAccesibilidad = useRef(null);
 
   function abrirAccesibilidad(evento) {
@@ -24,6 +30,8 @@ const Navbar = ({ textos, cargando, idioma, onCambiarIdioma }) => {
   const abrir = textos?.menuMovil?.abrir;
   const cerrar = textos?.menuMovil?.cerrar;
   const botones = nav?.botones?.invitado;
+  const usuarioT = nav?.usuario;
+  const cerrarSesionMovil = textos?.menuMovil?.botones?.conSesion?.cerrarSesion;
   const codigos = textos?.idioma?.codigos;
   const etiquetaIdioma = textos?.idioma?.tituloCorto;
   const ariaAccesibilidad = nav?.aria?.accesibilidad;
@@ -35,13 +43,33 @@ const Navbar = ({ textos, cargando, idioma, onCambiarIdioma }) => {
   useEffect(() => {
     function cerrarConEscape(evento) {
       if (evento.key !== "Escape") return;
+      if (menuUsuarioAbierto) {
+        setMenuUsuarioAbierto(false);
+        botonUsuario.current?.focus();
+        return;
+      }
       if (!abierto) return;
       setAbierto(false);
       botonMenu.current?.focus();
     }
     document.addEventListener("keydown", cerrarConEscape);
     return () => document.removeEventListener("keydown", cerrarConEscape);
-  }, [abierto]);
+  }, [abierto, menuUsuarioAbierto]);
+
+  useEffect(() => {
+    if (!menuUsuarioAbierto) return undefined;
+    function alClicFuera(evento) {
+      if (
+        menuUsuario.current?.contains(evento.target) ||
+        botonUsuario.current?.contains(evento.target)
+      ) {
+        return;
+      }
+      setMenuUsuarioAbierto(false);
+    }
+    document.addEventListener("mousedown", alClicFuera);
+    return () => document.removeEventListener("mousedown", alClicFuera);
+  }, [menuUsuarioAbierto]);
 
   useEffect(() => {
     const consulta = window.matchMedia("(min-width: 900px)");
@@ -51,6 +79,18 @@ const Navbar = ({ textos, cargando, idioma, onCambiarIdioma }) => {
     consulta.addEventListener("change", alCambiar);
     return () => consulta.removeEventListener("change", alCambiar);
   }, []);
+
+  async function alCerrarSesion() {
+    setMenuUsuarioAbierto(false);
+    setAbierto(false);
+    await cerrarSesion();
+    navigate("/");
+  }
+
+  const iniciales = usuario?.iniciales || "?";
+  const nombreCorto = usuario?.nombre?.split(/\s+/)[0] || usuario?.nombre;
+  const colorAvatarMovil = usuario?.colorHex || "var(--portada-1)";
+  const sesionIniciada = textos?.menuMovil?.secciones?.cuenta;
 
   return (
     <header className={`navbar${abierto ? " is-abierto" : ""}`}>
@@ -71,14 +111,14 @@ const Navbar = ({ textos, cargando, idioma, onCambiarIdioma }) => {
         </Link>
 
         <div className="navbar-movil-acciones">
-          {botones?.ingresar && (
-            <a
-              href="#ingresar"
+          {!usuario && botones?.ingresar && (
+            <Link
+              to="/ingresar"
               className="navbar-ingresar navbar-ingresar-movil"
               onClick={() => setAbierto(false)}
             >
               <span className="navbar-ingresar-texto">{botones.ingresar}</span>
-            </a>
+            </Link>
           )}
           <button
             type="button"
@@ -174,23 +214,96 @@ const Navbar = ({ textos, cargando, idioma, onCambiarIdioma }) => {
             )}
 
             <div className="navbar-accesos">
-              {botones?.ingresar && (
-                <a
-                  href="#ingresar"
-                  className="navbar-ingresar"
-                  onClick={() => setAbierto(false)}
-                >
-                  <span className="navbar-ingresar-texto">{botones.ingresar}</span>
-                </a>
-              )}
-              {botones?.crearCuenta && (
-                <a
-                  href="#crear-cuenta"
-                  className="navbar-crearcuenta"
-                  onClick={() => setAbierto(false)}
-                >
-                  <span className="navbar-crearcuenta-texto">{botones.crearCuenta}</span>
-                </a>
+              {usuario ? (
+                <>
+                  <div className="navbar-usuario">
+                    <button
+                      type="button"
+                      ref={botonUsuario}
+                      className="navbar-avatar"
+                      aria-label={usuarioT?.menu}
+                      aria-expanded={menuUsuarioAbierto}
+                      aria-haspopup="menu"
+                      onClick={() => setMenuUsuarioAbierto((valor) => !valor)}
+                    >
+                      <span>{iniciales}</span>
+                    </button>
+                    {menuUsuarioAbierto && (
+                      <div
+                        className="navbar-usuario-menu"
+                        role="menu"
+                        ref={menuUsuario}
+                      >
+                        <div className="navbar-usuario-cabecera">
+                          <span className="navbar-avatar navbar-avatar-menu" aria-hidden="true">
+                            <span>{iniciales}</span>
+                          </span>
+                          <div className="navbar-usuario-datos">
+                            <p className="navbar-usuario-nombre cuerpo-p-fuerte">
+                              {usuario.nombre}
+                            </p>
+                            {usuario.correo && (
+                              <p className="navbar-usuario-correo detalle-nota">
+                                {usuario.correo}
+                              </p>
+                            )}
+                          </div>
+                        </div>
+                        <div className="navbar-usuario-separador" aria-hidden="true" />
+                        <button
+                          type="button"
+                          role="menuitem"
+                          className="navbar-usuario-item"
+                          onClick={alCerrarSesion}
+                        >
+                          <Icono nombre="salir" />
+                          <span>{usuarioT?.cerrarSesion || cerrarSesionMovil}</span>
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                  <div className="navbar-sesion-movil">
+                    <div className="navbar-sesion-movil-persona">
+                      <span
+                        className="navbar-avatar navbar-avatar-sesion"
+                        style={{ background: colorAvatarMovil }}
+                        aria-hidden="true"
+                      >
+                        <span>{iniciales}</span>
+                      </span>
+                      <div className="navbar-sesion-movil-datos">
+                        <p className="cuerpo-p-fuerte">{nombreCorto}</p>
+                        {sesionIniciada && (
+                          <p className="detalle-nota">{sesionIniciada}</p>
+                        )}
+                      </div>
+                    </div>
+                    <button
+                      type="button"
+                      className="navbar-cerrar-movil"
+                      onClick={alCerrarSesion}
+                    >
+                      <span>{cerrarSesionMovil || usuarioT?.cerrarSesion}</span>
+                    </button>
+                  </div>
+                </>
+              ) : (
+                <>
+                  {botones?.ingresar && (
+                    <Link
+                      to="/ingresar"
+                      className="navbar-ingresar"
+                      onClick={() => setAbierto(false)}
+                    >
+                      <span className="navbar-ingresar-texto">{botones.ingresar}</span>
+                    </Link>
+                  )}
+                  {botones?.crearCuenta && (
+                    <span className="navbar-crearcuenta navbar-crearcuenta-inactivo">
+                      <span className="navbar-crearcuenta-texto">{botones.crearCuenta}</span>
+                    </span>
+                  )}
+                </>
               )}
             </div>
           </div>
