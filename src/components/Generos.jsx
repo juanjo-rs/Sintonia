@@ -92,7 +92,7 @@ const Generos = ({
       <div className="contenedor-generos contenedor-generos-catalogo">
         <div className="contenedor-2 generos-fila">
           <div className="generos-superior generos-superior-catalogo">
-            <p className={`generos-titulo ${movil ? "titular-h3" : "titular-h1"}`}>
+            <p className={`generos-titulo ${movil ? "titular-h2" : "titular-h1"}`}>
               {textoCatalogo?.titulo}
             </p>
             <p className="generos-descripcion cuerpo-m">{textoCatalogo?.subtitulo}</p>
