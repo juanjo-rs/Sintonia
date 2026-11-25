@@ -116,6 +116,54 @@ const ICONOS = {
       </>
     ),
   },
+  ojo: {
+    viewBox: "0 0 20 20",
+    size: 20,
+    content: (
+      <>
+        <path d="M1.66675 10C1.66675 10 4.16675 4.16669 10.0001 4.16669C15.8334 4.16669 18.3334 10 18.3334 10C18.3334 10 15.8334 15.8334 10.0001 15.8334C4.16675 15.8334 1.66675 10 1.66675 10Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M10 12.5C11.3807 12.5 12.5 11.3807 12.5 10C12.5 8.61929 11.3807 7.5 10 7.5C8.61929 7.5 7.5 8.61929 7.5 10C7.5 11.3807 8.61929 12.5 10 12.5Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      </>
+    ),
+  },
+  "ojo-oculto": {
+    viewBox: "0 0 20 20",
+    size: 20,
+    content: (
+      <>
+        <path d="M8.45 4.28335C8.95338 4.20445 9.46666 4.1652 9.98167 4.16669C15.815 4.16669 18.315 10 18.315 10C17.8784 10.9372 17.2923 11.8075 16.5733 12.5834M11.55 11.55C11.3456 11.7705 11.0982 11.9483 10.8225 12.0727C10.5468 12.1971 10.2484 12.2656 9.94517 12.2742C9.64195 12.2827 9.34005 12.2311 9.05755 12.1225C8.77506 12.0139 8.5176 11.8505 8.30037 11.6419C8.08313 11.4333 7.91069 11.1838 7.79325 10.9074C7.67581 10.6311 7.61568 10.3327 7.61639 10.0294C7.6171 9.72603 7.67863 9.42396 7.79736 9.14138C7.91609 8.8588 8.08964 8.60129 8.30783 8.39285M1.66675 1.66669L18.3334 18.3334M14.0601 14.0667C12.8851 14.8721 11.4716 15.3085 10.0001 15.8334C4.16675 15.8334 1.66675 10 1.66675 10C2.49168 8.45845 3.64572 7.0921 5.06675 5.96669L14.0601 14.0667Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      </>
+    ),
+  },
+  alerta: {
+    viewBox: "0 0 20 20",
+    size: 20,
+    content: (
+      <>
+        <path d="M10 18.3334C14.6024 18.3334 18.3334 14.6024 18.3334 10C18.3334 5.39765 14.6024 1.66669 10 1.66669C5.39765 1.66669 1.66675 5.39765 1.66675 10C1.66675 14.6024 5.39765 18.3334 10 18.3334Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M10 6.66669V10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M10 13.3333H10.0083" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      </>
+    ),
+  },
+  spinner: {
+    viewBox: "0 0 20 20",
+    size: 20,
+    content: (
+      <path d="M10 2.5V5.83333M10 14.1667V17.5M4.6967 4.6967L7.0533 7.0533M12.9467 12.9467L15.3033 15.3033M2.5 10H5.83333M14.1667 10H17.5M4.6967 15.3033L7.0533 12.9467M12.9467 7.0533L15.3033 4.6967" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    ),
+  },
+  salir: {
+    viewBox: "0 0 20 20",
+    size: 20,
+    content: (
+      <>
+        <path d="M7.5 17.5H4.16667C3.72464 17.5 3.30072 17.3244 2.98816 17.0118C2.67559 16.6993 2.5 16.2754 2.5 15.8333V4.16667C2.5 3.72464 2.67559 3.30072 2.98816 2.98816C3.30072 2.67559 3.72464 2.5 4.16667 2.5H7.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M13.3333 14.1667L17.5 10L13.3333 5.83337" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M17.5 10H7.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      </>
+    ),
+  },
 };
 
 export default function Icono({ nombre, tamano }) {
